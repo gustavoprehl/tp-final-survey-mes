@@ -1,0 +1,16 @@
+# Dados com identificação pessoal nunca entram no repositório (LGPD)
+*identificad*
+*contatos*
+*emails*
+
+# Python / Streamlit
+__pycache__/
+*.pyc
+.venv/
+venv/
+.streamlit/secrets.toml
+
+# Sistema
+.DS_Store
+Thumbs.db
+~$*
