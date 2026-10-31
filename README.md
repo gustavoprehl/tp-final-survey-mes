@@ -12,6 +12,6 @@ Trabalho final da disciplina de Medição e Experimentação de Software (PUC Mi
 - [Enunciado](Enunciado.md)
 - [Plano de ação e divisão de tarefas](docs/PLANO_DE_ACAO.md)
 - [Registro de desvios do protocolo](docs/DESVIOS.md)
-- Tarefas: aba **Projects** deste repositório
+- [Quadro de tarefas (GitHub Projects)](https://github.com/users/gustavoprehl/projects/7)
 
 > **Pré-registro:** a tag `protocolo-v1` marca a versão do protocolo entregue na Parte 1. Nenhuma resposta pode ter sido coletada antes da data desse commit.

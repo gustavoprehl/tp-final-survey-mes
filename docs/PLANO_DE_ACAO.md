@@ -5,7 +5,7 @@
 **Ferramenta do dashboard:** Streamlit (Python), lendo o CSV bruto exportado do formulário
 **Tema:** a definir no kickoff (ver temas sugeridos no [enunciado](../Enunciado.md))
 
-O acompanhamento das tarefas é feito no **GitHub Projects** do repositório. Cada tarefa é uma issue com responsável, início, prazo e critério de pronto.
+O acompanhamento das tarefas é feito no [GitHub Projects](https://github.com/users/gustavoprehl/projects/7). Cada tarefa é uma issue com responsável, início, prazo e critério de pronto.
 
 ---
 
