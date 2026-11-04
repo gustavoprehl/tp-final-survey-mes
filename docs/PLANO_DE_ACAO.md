@@ -3,7 +3,7 @@
 **Integrantes:** Arthur Panzera · Diogo Brunoro · Gustavo Prehl
 **Entregas:** Parte 1 (Planejamento, 2 pts) em **12/11/2026** · Parte 2 (Dashboard e evidências, 8 pts) em **26/11/2026**
 **Ferramenta do dashboard:** Streamlit (Python), lendo o CSV bruto exportado do formulário
-**Tema:** a definir no kickoff (ver temas sugeridos no [enunciado](../Enunciado.md))
+**Tema:** uso de métricas na avaliação de produtos de dados e automação (dashboards, bases, pipelines e automações de processo). Ver [matriz de rastreabilidade](../questionario/matriz_rastreabilidade.md)
 
 O acompanhamento das tarefas é feito no [GitHub Projects](https://github.com/users/gustavoprehl/projects/7). Cada tarefa é uma issue com responsável, início, prazo e critério de pronto.
 
