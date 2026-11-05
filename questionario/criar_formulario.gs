@@ -16,7 +16,7 @@
 
 const CONFIG = {
   contato: 'PREENCHER',  // e-mail de contato do grupo exibido no TCLE
-  preTeste: false,
+  preTeste: false,  // true = cópia de pré-teste, aberta; false = formulário oficial, fechado
 };
 
 const LIKERT = ['Discordo totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo totalmente'];
