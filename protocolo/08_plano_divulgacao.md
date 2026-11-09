@@ -2,7 +2,9 @@
 
 ## Período de coleta
 
-**09/11/2026 a 22/11/2026**, com 14 dias de coleta. O formulário só é aberto depois do commit com a tag `protocolo-v1` e do envio do protocolo na plataforma da disciplina. Às 23h59 de 22/11, o formulário deixa de aceitar respostas.
+**12/11/2026 a 22/11/2026**, com 11 dias de coleta. O formulário só é aberto depois do commit com a tag `protocolo-v1` e do envio do protocolo na plataforma da disciplina. Às 23h59 de 22/11, o formulário deixa de aceitar respostas.
+
+Se a tag for criada depois de 11/11, a abertura passa para o dia seguinte à tag, o encerramento em 22/11 é mantido e a mudança é registrada em `docs/DESVIOS.md`.
 
 ## Mensagem padrão
 
@@ -35,7 +37,7 @@ O formulário não tem pergunta para identificar colegas da disciplina (ela foi 
 
 ## Canais reserva
 
-São ativados se em **16/11** houver menos de **35 respostas brutas** (metade da meta de 70), conforme o ponto de controle do plano de ação.
+São ativados se em **17/11** houver menos de **35 respostas brutas** (metade da meta de 70), conforme o ponto de controle do plano de ação.
 
 | Canal reserva | Ação |
 |---|---|
@@ -52,18 +54,18 @@ Um novo post ou lembrete sai a cada 3 ou 4 dias. Cada pessoa ou grupo recebe no 
 
 | Data | Ação |
 |---|---|
-| **09/11 (seg)** | Abertura do formulário. Primeiros posts no LinkedIn, mensagens em grupos e envio nas empresas |
-| 10/11 – 11/11 | Mensagens diretas no LinkedIn |
-| **12/11 (qui)** | 1º lembrete nos grupos e repost no LinkedIn, com o número parcial de respostas |
-| **16/11 (seg)** | Ponto de controle: se houver menos de 35 respostas brutas, ativar os canais reserva. 2º lembrete |
-| **19/11 (qui)** | 3º lembrete: "últimos dias" |
+| **12/11 (qui)** | Abertura do formulário. Primeiros posts no LinkedIn, mensagens em grupos e envio nas empresas |
+| 13/11 – 14/11 | Mensagens diretas no LinkedIn |
+| **16/11 (seg)** | 1º lembrete nos grupos e repost no LinkedIn, com o número parcial de respostas |
+| **17/11 (ter)** | Ponto de controle: se houver menos de 35 respostas brutas, ativar os canais reserva |
+| **19/11 (qui)** | 2º lembrete: "últimos dias" |
 | **22/11 (dom)** | Último aviso pela manhã e encerramento às 23h59 |
 
 A contagem de respostas brutas é postada diariamente no grupo da equipe pelo integrante de plantão.
 
 ## Registro das evidências
 
-Cada divulgação gera uma **captura de tela datada**, salva em `evidencias/divulgacao/` com o nome `AAAA-MM-DD_canal_descricao.png` (por exemplo, `2026-11-09_linkedin_post-diogo.png`).
+Cada divulgação gera uma **captura de tela datada**, salva em `evidencias/divulgacao/` com o nome `AAAA-MM-DD_canal_descricao.png` (por exemplo, `2026-11-12_linkedin_post-diogo.png`).
 
 - A captura deve mostrar a **data e a hora** da publicação (data visível na própria plataforma ou relógio do sistema na tela).
 - Antes do commit, nomes, fotos e números de telefone de terceiros são **ocultados**, e só o texto da divulgação, o canal e a data ficam visíveis.

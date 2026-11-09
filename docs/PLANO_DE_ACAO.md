@@ -13,7 +13,7 @@ O acompanhamento das tarefas é feito no [GitHub Projects](https://github.com/us
 
 O prazo entre as entregas é de apenas duas semanas, e a coleta só pode começar **depois** do commit do protocolo. Por isso:
 
-1. **Antecipar a Parte 1.** Meta interna: protocolo commitado e com tag `protocolo-v1` em **09/11**, três dias antes do prazo. Isso dá cerca de 14 dias de coleta (09/11 a 22/11).
+1. **Antecipar a Parte 1.** Meta interna: protocolo commitado e com tag `protocolo-v1` até **11/11**, um dia antes do prazo. Isso dá 11 dias de coleta (12/11 a 22/11).
 2. **Construir o dashboard em paralelo à coleta.** Durante o desenvolvimento, o dashboard usa o CSV do pré-teste ou dados sintéticos, guardados em `dados/sinteticos/` e identificados como tal. Esses dados **nunca** entram na análise final, já que o enunciado trata dados fabricados como fraude acadêmica.
 3. **Meta de coleta com folga.** O mínimo são 50 respostas válidas. A meta é de **70 respostas brutas**, porque parte delas será descartada (pergunta de atenção, respostas incompletas, pessoas fora da população).
 4. **Todos dominam tudo.** A arguição é individual e cobre o estudo inteiro. Toda seção escrita por alguém é revisada por outro integrante, e o ensaio final inclui perguntas cruzadas.
@@ -43,7 +43,7 @@ O prazo entre as entregas é de apenas duas semanas, e a coleta só pode começa
 
 ## 3. Cronograma
 
-### Parte 1 — Planejamento (30/10 a 09/11; prazo oficial 12/11)
+### Parte 1 — Planejamento (30/10 a 11/11; prazo oficial 12/11)
 
 | Período | Tarefa | Responsável |
 |---|---|---|
@@ -59,14 +59,14 @@ O prazo entre as entregas é de apenas duas semanas, e a coleta só pode começa
 | 05/11 – 07/11 | §4 Pré-teste com 3 a 5 pessoas e registro das mudanças | Arthur |
 | 07/11 – 08/11 | Consolidar o PDF (até 6 páginas) | Gustavo |
 | 08/11 | Revisão cruzada do protocolo | Todos |
-| **09/11** | **Commit, tag `protocolo-v1` e envio na plataforma. Só depois disso o formulário é aberto.** | Gustavo |
+| **11/11** | **Commit, tag `protocolo-v1` e envio na plataforma. Só depois disso o formulário é aberto.** | Gustavo |
 
-### Parte 2 — Coleta, dashboard e defesa (09/11 a 26/11)
+### Parte 2 — Coleta, dashboard e defesa (12/11 a 26/11)
 
 | Período | Tarefa | Responsável |
 |---|---|---|
-| 09/11 – 22/11 | Divulgação nos canais planejados, com capturas de tela datadas | Diogo |
-| 09/11 – 22/11 | Divulgação nas redes de cada integrante e acompanhamento diário da contagem | Todos |
+| 12/11 – 22/11 | Divulgação nos canais planejados, com capturas de tela datadas | Diogo |
+| 12/11 – 22/11 | Divulgação nas redes de cada integrante e acompanhamento diário da contagem | Todos |
 | 10/11 – 14/11 | Esqueleto do dashboard Streamlit lendo o CSV bruto | Gustavo |
 | 12/11 – 17/11 | Pipeline de limpeza e descartes, com o motivo de cada um | Arthur |
 | 12/11 – 19/11 | Módulo estatístico: testes, p-valor, tamanho de efeito, Holm e margem de erro | Diogo |
@@ -84,7 +84,7 @@ O prazo entre as entregas é de apenas duas semanas, e a coleta só pode começa
 
 ## 4. Pontos de controle
 
-- **Contagem de respostas:** quem estiver de plantão na semana posta diariamente no grupo o número de respostas brutas. Se em 16/11 houver menos de 35, o grupo ativa os canais reserva previstos no §8.
+- **Contagem de respostas:** quem estiver de plantão na semana posta diariamente no grupo o número de respostas brutas. Se em 17/11 houver menos de 35, o grupo ativa os canais reserva previstos no §8.
 - **Desvios:** toda mudança em relação ao protocolo (pergunta alterada, canal novo, teste trocado) é registrada **no mesmo dia** em `docs/DESVIOS.md`, com data, o que mudou e por quê. Esse arquivo alimenta a página de metodologia do dashboard.
 - **Dados pessoais:** o repositório guarda apenas dados anonimizados. Se o formulário coletar e-mail (para sorteio, por exemplo), esse campo fica fora do repositório, em uma pasta restrita do Drive, e é removido antes de qualquer export.
 
