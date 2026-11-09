@@ -2,7 +2,7 @@
 
 ## Estrutura
 
-O questionário é aplicado pelo Google Forms, gerado por script versionado no repositório (`questionario/criar_formulario.gs`). Tem 23 itens em seis páginas, com tempo estimado de 7 a 9 minutos. Não coleta nome, e-mail nem empresa.
+O questionário é aplicado pelo Google Forms, gerado por script versionado no repositório (`questionario/criar_formulario.gs`). Tem 23 itens em seis páginas, com tempo estimado de 10 a 15 minutos (medido no pré-teste). Não coleta nome, e-mail nem empresa.
 
 | Página | Conteúdo | Itens |
 |---|---|---|

@@ -57,7 +57,7 @@ Codificação Likert: Discordo totalmente = 1 … Concordo totalmente = 5. Itens
 ## Regras de descarte (ordem de aplicação)
 
 1. Sem consentimento (TC1)
-2. Fora da população (F1 = "Não")
+2. Fora da população: F1 = "Não", **ou** P1 = "Outra" com uma área sem relação com dados ou automação (ex.: "Psicóloga"). Este segundo caso é decidido por dois pesquisadores de forma independente; em caso de divergência, a resposta é mantida
 3. Falhou na pergunta de atenção (ATT)
 4. Respostas duplicadas (todas as colunas idênticas, exceto o carimbo de data/hora)
 

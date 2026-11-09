@@ -32,7 +32,7 @@ function criarFormulario() {
   form.setDescription(
     'Pesquisa acadêmica sobre como profissionais que entregam dashboards, relatórios, bases de dados, '
     + 'pipelines e automações de processo medem a qualidade e o uso dessas entregas. '
-    + 'Tempo estimado: 7 a 9 minutos. Respostas anônimas.');
+    + 'Tempo estimado: 10 a 15 minutos. Respostas anônimas.');
   form.setCollectEmail(false);
   form.setLimitOneResponsePerUser(false);  // exigiria login, o que identifica o respondente
   form.setAllowResponseEdits(false);
