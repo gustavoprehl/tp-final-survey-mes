@@ -167,11 +167,6 @@ function secaoFiltroEPerfil(form) {
     ])
     .showOtherOption(true)
     .setRequired(true);
-
-  form.addMultipleChoiceItem()
-    .setTitle('Você está cursando a disciplina de Medição e Experimentação de Software da PUC Minas neste semestre?')
-    .setChoiceValues(['Sim', 'Não'])
-    .setRequired(true);
 }
 
 // Página 4 — métricas usadas (QP1) e qualidade/retrabalho (QP3)
@@ -181,8 +176,10 @@ function secaoMetricas(form) {
     .setHelpText('Considere as entregas do seu time: dashboards, bases, pipelines, automações etc.');
 
   form.addCheckboxItem()
-    .setTitle('Quais destas métricas o seu time acompanha DE FATO para avaliar as entregas?')
-    .setHelpText('Marque apenas as que são medidas com regularidade, não as que aparecem só de vez em quando.')
+    .setTitle('Quais indicadores o seu time acompanha regularmente para saber se as entregas '
+      + '(dashboards, relatórios, bases, automações) estão funcionando bem?')
+    .setHelpText('Considere apenas indicadores medidos com frequência definida, como toda semana ou todo mês. '
+      + 'Marque todos os que se aplicam.')
     .setChoiceValues([
       'Uso ou adoção (acessos, usuários ativos, consultas)',
       'Qualidade dos dados (completude, erros, duplicidade)',
@@ -205,7 +202,7 @@ function secaoMetricas(form) {
     .setRequired(true);
 
   form.addMultipleChoiceItem()
-    .setTitle('Nos últimos 3 meses, com que frequência entregas suas precisaram ser refeitas ou corrigidas por problemas nos dados?')
+    .setTitle('Nos últimos 3 meses, com que frequência você precisou refazer ou corrigir uma entrega por causa de problemas nos dados?')
     .setChoiceValues(['Nunca', 'Raramente', 'Às vezes', 'Frequentemente', 'Sempre'])
     .setRequired(true);
 

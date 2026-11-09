@@ -2,13 +2,13 @@
 
 ## Estrutura
 
-O questionário é aplicado pelo Google Forms, gerado por script versionado no repositório (`questionario/criar_formulario.gs`). Tem 24 itens em seis páginas, com tempo estimado de 7 a 9 minutos. Não coleta nome, e-mail nem empresa.
+O questionário é aplicado pelo Google Forms, gerado por script versionado no repositório (`questionario/criar_formulario.gs`). Tem 23 itens em seis páginas, com tempo estimado de 7 a 9 minutos. Não coleta nome, e-mail nem empresa.
 
 | Página | Conteúdo | Itens |
 |---|---|---|
 | 1 | Termo de consentimento; quem não concorda vai direto ao envio | TC1 |
 | 2 | Filtro da população; quem não trabalha com produtos de dados ou automação vai direto ao envio | F1 |
-| 3 | Perfil, usado como segmento nas análises; inclui a pergunta que identifica colegas da disciplina | P1–P6, F2 |
+| 3 | Perfil, usado como segmento nas análises | P1–P6 |
 | 4 | Métricas usadas, qualidade dos dados e retrabalho | M1–M4 |
 | 5 | Percepções: dois construtos em grade Likert de 5 pontos e a pergunta de atenção | UT1–UT4, ATT, MM1–MM4 |
 | 6 | Perguntas abertas, opcionais | A1, A2 |
@@ -17,7 +17,7 @@ O questionário é aplicado pelo Google Forms, gerado por script versionado no r
 
 | Escala | Itens |
 |---|---|
-| Nominal | TC1, F1, F2, P1, P4, P6 (múltipla), M1 (múltipla), M2, ATT |
+| Nominal | TC1, F1, P1, P4, P6 (múltipla), M1 (múltipla), M2, ATT |
 | Ordinal | P2, P3, M3, UT1–UT4, MM1–MM4 (Likert: Discordo totalmente = 1 … Concordo totalmente = 5) |
 | Razão | P5 (pessoas no time), M4 (nº de falhas em 30 dias) |
 | Aberta | A1, A2 |
@@ -43,6 +43,6 @@ Na grade de utilidade, entre UT3 e UT4, há a linha *"Para mostrar que você est
 | QP2 | UT1–UT4 | P1 (grupos) |
 | QP3 | M2 (grupo), M3 (principal), M4 (secundária) | — |
 | QP4 | MM1–MM4 | P2 |
-| Controle | TC1, F1, F2, ATT | Regras de descarte (seção 5) |
+| Controle | TC1, F1, ATT | Regras de descarte (seção 5) |
 
 A matriz completa, com o texto de cada item, a métrica, a escala e a codificação, está no Apêndice A (`questionario/matriz_rastreabilidade.md`).

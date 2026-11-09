@@ -31,10 +31,9 @@ Codificação Likert: Discordo totalmente = 1 … Concordo totalmente = 5. Itens
 | P4 | Qual é o setor da empresa? | — | Setor | Nominal | Segmento; descritivo |
 | P5 | Quantas pessoas fazem parte do seu time direto (incluindo você)? | — | Tamanho do time | Razão | Descritivo (mediana, IIQ) |
 | P6 | Quais ferramentas você usa com frequência no trabalho? | — | Ferramentas | Nominal (múltipla) | Uma variável 0/1 por opção; descritivo |
-| F2 | Você está cursando a disciplina de MES da PUC Minas neste semestre? | — | Colega de turma | Nominal | "Sim" → descarte (regra do enunciado) |
-| M1 | Quais destas métricas o seu time acompanha DE FATO para avaliar as entregas? | QP1 | Métricas adotadas | Nominal (múltipla) | Uma variável 0/1 por métrica; % de adoção ± margem de erro |
+| M1 | Quais indicadores o seu time acompanha regularmente para saber se as entregas (dashboards, relatórios, bases, automações) estão funcionando bem? | QP1 | Métricas adotadas | Nominal (múltipla) | Uma variável 0/1 por métrica; % de adoção ± margem de erro |
 | M2 | O seu time mede a qualidade dos dados de forma estruturada? | QP3 | Medição formal de qualidade | Nominal | Sim (automatizada ou manual) = 1; Não = 0; "Não sei" fica fora da QP3 |
-| M3 | Nos últimos 3 meses, com que frequência entregas suas precisaram ser refeitas ou corrigidas por problemas nos dados? | QP3 | Frequência de retrabalho | Ordinal | Nunca = 1 … Sempre = 5; variável dependente principal da QP3 |
+| M3 | Nos últimos 3 meses, com que frequência você precisou refazer ou corrigir uma entrega por causa de problemas nos dados? | QP3 | Frequência de retrabalho | Ordinal | Nunca = 1 … Sempre = 5; variável dependente principal da QP3 |
 | M4 | Nos últimos 30 dias, quantas vezes uma entrega sob sua responsabilidade falhou ou exibiu dados incorretos? | QP3 | Nº de falhas | Razão | Variável dependente secundária da QP3 |
 | UT1 | As métricas que acompanhamos ajudam a decidir o que melhorar nas entregas. | QP2 | Utilidade percebida | Ordinal (Likert 5) | Construto UT |
 | UT2 | As métricas refletem bem o valor que as minhas entregas geram para a empresa. | QP2 | Utilidade percebida | Ordinal (Likert 5) | Construto UT |
@@ -59,10 +58,11 @@ Codificação Likert: Discordo totalmente = 1 … Concordo totalmente = 5. Itens
 
 1. Sem consentimento (TC1)
 2. Fora da população (F1 = "Não")
-3. Colega de turma (F2 = "Sim")
-4. Falhou na pergunta de atenção (ATT)
-5. Respostas duplicadas (todas as colunas idênticas, exceto o carimbo de data/hora)
+3. Falhou na pergunta de atenção (ATT)
+4. Respostas duplicadas (todas as colunas idênticas, exceto o carimbo de data/hora)
 
 Cada resposta descartada recebe o motivo da primeira regra que a eliminou. O dashboard mostra a contagem por motivo.
+
+> **Colegas da turma:** a pergunta que identificava alunos da disciplina foi retirada após o pré-teste. A exclusão de colegas passa a ser feita na divulgação: o link não é enviado nos canais da turma nem a colegas da disciplina (ver seções 7 e 8 do protocolo).
 
 > **Limitação:** o Google Forms registra apenas a hora de envio, não a de início. Por isso, o tempo de preenchimento não pode ser usado como critério de descarte.
