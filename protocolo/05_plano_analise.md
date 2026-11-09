@@ -7,7 +7,7 @@ A análise é feita em Python (pandas, SciPy, pingouin, scikit-posthocs) e roda 
 As regras são aplicadas nesta ordem. Cada resposta descartada recebe o motivo da primeira regra que a eliminou, e o dashboard mostra a contagem por motivo.
 
 1. **Sem consentimento:** TC1 = "Não concordo".
-2. **Fora da população:** F1 = "Não".
+2. **Fora da população:** F1 = "Não", ou P1 = "Outra" com uma área sem relação com dados ou automação (caso visto no pré-teste). O segundo caso é decidido por dois pesquisadores de forma independente; se divergirem, a resposta é mantida.
 3. **Falha de atenção:** ATT diferente de "Discordo totalmente".
 4. **Duplicada:** todas as colunas idênticas a outra resposta, exceto o carimbo de data/hora. A primeira é mantida.
 5. **Incompleta:** todos os itens obrigatórios são exigidos pelo formulário, então uma resposta só fica incompleta se encerrar em TC1 ou F1, casos já cobertos pelas regras 1 e 2.

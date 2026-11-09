@@ -10,7 +10,7 @@ Todos os canais recebem a mesma mensagem-base, adaptada apenas no tamanho. Ela i
 
 - quem somos (alunos de MES da PUC Minas) e para que serve a pesquisa;
 - o público procurado: quem cria ou mantém dashboards, relatórios, bases, pipelines ou automações;
-- o tempo estimado (7 a 9 minutos) e o fato de a pesquisa ser anônima;
+- o tempo estimado (10 a 15 minutos, medido no pré-teste) e o fato de a pesquisa ser anônima;
 - o pedido para repassar o link a outras pessoas da área (bola de neve).
 
 A mensagem não oferece recompensa, para não atrair respostas só pelo prêmio.
