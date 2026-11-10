@@ -65,11 +65,16 @@ function secaoConsentimento(form) {
       + 'da PUC Minas, realizado pelos alunos Arthur Panzera, Diogo Brunoro e Gustavo Prehl.\n\n'
       + 'Objetivo: entender quais métricas os profissionais de dados, BI, CRM e automação usam para avaliar '
       + 'suas entregas e como percebem a utilidade dessas métricas.\n\n'
+      + 'Tempo estimado: 10 a 15 minutos.\n\n'
       + '• A participação é voluntária, e você pode desistir a qualquer momento antes de enviar.\n'
-      + '• Não coletamos nome, e-mail, empresa ou qualquer dado que identifique você.\n'
+      + '• Não coletamos nome, e-mail, empresa ou qualquer dado que identifique você. '
+      + 'Por isso, depois do envio não é possível localizar nem retirar a sua resposta.\n'
+      + '• Evite citar nomes de pessoas ou empresas nas perguntas abertas. Se aparecerem, serão removidos.\n'
       + '• As respostas serão usadas apenas para fins acadêmicos e divulgadas somente de forma agregada.\n'
-      + '• Os dados ficam armazenados com acesso restrito aos pesquisadores, conforme a LGPD (Lei 13.709/2018).\n'
+      + '• A planilha original fica com acesso restrito aos pesquisadores e será apagada ao fim do semestre '
+      + '(dezembro/2026). Apenas a versão anonimizada é mantida como evidência do trabalho, conforme a LGPD (Lei 13.709/2018).\n'
       + '• Não há riscos previstos além do tempo de preenchimento.\n\n'
+      + 'Se quiser, salve ou imprima esta página para guardar uma cópia do termo.\n\n'
       + 'Dúvidas: ' + CONFIG.contato);
 
   const consentimento = form.addMultipleChoiceItem();
