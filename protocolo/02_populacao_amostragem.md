@@ -2,59 +2,28 @@
 
 ## População-alvo
 
-Profissionais que **criam ou mantêm produtos de dados ou automação** em empresas brasileiras: dashboards, relatórios, bases ou extrações para outras áreas, pipelines de dados, segmentações de campanha e automações de processo (RPA, low-code, scripts, workflows). Isso inclui as áreas de análise de dados/BI, CRM/marketing analytics, engenharia de dados, ciência de dados e automação de processos.
+Profissionais que **criam ou mantêm produtos de dados ou automação** em empresas brasileiras (dashboards, relatórios, bases ou extrações, pipelines, segmentações de campanha, automações com RPA, low-code ou scripts), nas áreas de análise de dados/BI, CRM/marketing analytics, engenharia e ciência de dados e automação de processos. Não existe cadastro dessa população, então seu tamanho é desconhecido e tratado como infinito no cálculo da margem de erro.
 
-A população não tem cadastro (lista completa de membros), então o tamanho dela é desconhecido e tratado como infinito no cálculo da margem de erro.
+A inclusão é verificada no formulário: consentimento (TC1), filtro de pertencimento (F1) e área de atuação (P1). As regras de descarte estão na seção 5.
 
-## Critérios de inclusão e exclusão
+**Colegas da turma** não contam na amostra, porque a população é de profissionais, e não de estudantes. Como a pergunta que os identificava saiu após o pré-teste (seção 4), a exclusão é feita na divulgação (seção 8). Estudantes de outras turmas que trabalham na área contam normalmente, porque o critério é o vínculo profissional.
 
-Os critérios são aplicados por perguntas filtro no próprio formulário. Isso permite contar no dashboard quantas respostas foram descartadas por cada motivo.
+## Origem dos contatos e estratégia de amostragem
 
-| Critério | Item | Regra |
-|---|---|---|
-| Consentimento | TC1 | "Não concordo" → encerra o formulário; resposta descartada |
-| Pertencer à população | F1 | "Não" (não cria nem mantém produtos de dados ou automação) → encerra o formulário; resposta descartada |
-| Atenção | ATT | Valor diferente de "Discordo totalmente" → descartada |
+Os contatos vêm de três fontes: (1) a rede direta dos integrantes, com colegas e ex-colegas de trabalho e contatos do LinkedIn da área; (2) comunidades abertas de dados, BI e automação no WhatsApp, Telegram, Discord e LinkedIn; (3) indicações dos próprios respondentes. Nenhuma lista comprada ou extraída sem consentimento é usada.
 
-**Colegas da turma.** O enunciado não permite que colegas da turma contem na amostra, a menos que a população-alvo seja de estudantes. Nossa população é de **profissionais**, então essa exceção não se aplica. A pergunta que identificava colegas da disciplina foi retirada após o pré-teste (ver seção 4). Agora a exclusão acontece **na divulgação**: o link não é enviado nos canais da turma (grupos e fóruns da disciplina) nem diretamente a colegas de MES (ver seção 8). Por isso, a exclusão depende do controle dos canais, e o risco de um colega receber o link por repasse é tratado como ameaça na seção 7. Estudantes de outras turmas ou cursos que já trabalham na área contam normalmente, porque o critério é o vínculo profissional (F1).
+A amostragem é **não probabilística, por conveniência, combinada com bola de neve**. Uma amostra probabilística exigiria uma lista da população, que não existe, e o grupo não tem acesso a cadastros de empresas ou associações. A conveniência é a única opção viável em 11 dias de coleta e é a estratégia mais comum em surveys de Engenharia de Software (Kitchenham e Pfleeger, 2008). A bola de neve alcança profissionais fora da rede direta do grupo.
 
-## Origem dos contatos
-
-1. **Rede direta dos integrantes:** colegas de trabalho e ex-colegas nas empresas onde os integrantes trabalham ou estagiaram, e contatos do LinkedIn que atuam com dados, BI, CRM ou automação.
-2. **Comunidades abertas:** grupos de WhatsApp, Telegram e Discord, além de comunidades do LinkedIn sobre dados, BI, Power BI, engenharia de dados e automação/RPA.
-3. **Indicação (bola de neve):** a mensagem de divulgação pede que cada respondente repasse o link a outras pessoas da área.
-
-Nenhum contato é feito a partir de listas compradas ou extraídas sem consentimento. O formulário não pede nome, e-mail nem empresa (ver seção 6).
-
-## Estratégia de amostragem
-
-A amostragem é **não probabilística, por conveniência, combinada com bola de neve**.
-
-**Por que não probabilística.** Uma amostra probabilística exige uma lista da população em que cada pessoa tem uma chance conhecida de ser sorteada. Não existe essa lista para profissionais de dados e automação no Brasil, e o grupo não tem acesso a cadastros de empresas ou associações. Com duas semanas de coleta e sem recursos, a conveniência é a única opção viável. Ela é também a estratégia mais comum em surveys de Engenharia de Software (Kitchenham e Pfleeger, 2008).
-
-**Por que bola de neve.** É uma população especializada, espalhada por áreas e empresas diferentes. A indicação entre pares alcança pessoas que não estão na rede direta dos integrantes nem nas comunidades abertas.
-
-**Consequências.** Os resultados descrevem a amostra obtida e **não podem ser generalizados** para todos os profissionais da área no Brasil. A amostra tende a concentrar pessoas parecidas com os integrantes (região, setor, porte da empresa) e pessoas mais interessadas em métricas (autosseleção). Para tornar esse viés visível, o perfil da amostra (P1–P6) aparece no dashboard e a análise pode ser filtrada por segmento. Essas ameaças e suas mitigações estão na seção 7.
+**Consequência:** os resultados descrevem a amostra e **não são generalizados** para todos os profissionais da área. A amostra tende a se concentrar em perfis parecidos com os dos integrantes e em pessoas mais interessadas em métricas. Para tornar esse viés visível, o dashboard mostra o perfil da amostra (P1–P6) e permite filtrar por segmento (seção 7).
 
 ## Tamanho de amostra e margem de erro
 
-A margem de erro de uma proporção, com 95% de confiança, é:
+Margem de erro de uma proporção com 95% de confiança, no pior caso (p = 0,5): **e = 1,96 × √(p(1 − p) / n)**.
 
-$$e = 1{,}96 \times \sqrt{\frac{p(1-p)}{n}}$$
-
-Usamos o pior caso, p = 0,5, porque ele dá a maior margem possível e não depende de nenhum resultado prévio.
-
-| n válidas | Cálculo (p = 0,5) | Margem de erro |
+| n válidas | Cálculo | Margem |
 |---|---|---|
-| 50 (mínimo do enunciado) | 1,96 × √(0,25 / 50) = 1,96 × 0,0707 | **± 13,9 p.p.** |
-| **60 (meta)** | 1,96 × √(0,25 / 60) = 1,96 × 0,0645 | **± 12,7 p.p.** |
-| 70 | 1,96 × √(0,25 / 70) = 1,96 × 0,0598 | ± 11,7 p.p. |
-| 100 | 1,96 × √(0,25 / 100) = 1,96 × 0,0500 | ± 9,8 p.p. |
+| 50 (mínimo) | 1,96 × √(0,25 / 50) | ± 13,9 p.p. |
+| **60 (meta)** | 1,96 × √(0,25 / 60) | **± 12,7 p.p.** |
+| 70 | 1,96 × √(0,25 / 70) | ± 11,7 p.p. |
 
-**Meta.** Queremos **60 respostas válidas**, com margem de erro de **± 12,7 p.p.** Prevendo cerca de 15% de descarte (fora da população, falha na pergunta de atenção, duplicadas), a meta de respostas brutas é de **70**. O mínimo aceitável é de 50 válidas (± 13,9 p.p.).
-
-**Interpretação.** Com n = 60, se 40% dos respondentes disserem que acompanham uma métrica (QP1), o intervalo de confiança vai aproximadamente de 27% a 53%. Por isso, só vamos afirmar que uma métrica é "mais usada" que outra quando a diferença for maior que a margem de erro. Diferenças menores serão apresentadas como empate.
-
-**Subgrupos.** A margem vale para a amostra inteira. Em subgrupos ela é maior: uma área com n = 15 tem margem de ± 25 p.p. Por isso, nas comparações entre áreas (QP2), as áreas com menos de 5 respostas são agrupadas em "Outras", e o dashboard mostra o n de cada segmento filtrado.
-
-**Ressalva.** A fórmula assume amostragem aleatória simples. Como a nossa amostra é por conveniência, a margem de erro mede apenas o erro de amostragem aleatória. Ela não inclui o viés de seleção, então a incerteza real é maior que a margem calculada.
+**Meta: 60 respostas válidas (± 12,7 p.p.).** Prevendo cerca de 15% de descarte, a meta é de **70 respostas brutas**; o mínimo aceitável é de 50 válidas. Com n = 60, uma métrica citada por 40% dos respondentes tem intervalo de cerca de 27% a 53%. Por isso, uma métrica só é dita "mais usada" que outra quando a diferença supera a margem; diferenças menores são relatadas como empate. Em subgrupos a margem é maior (n = 15 → ± 25 p.p.), e o dashboard mostra o n de cada segmento. A fórmula supõe amostragem aleatória simples, então a margem não inclui o viés de seleção, e a incerteza real é maior.

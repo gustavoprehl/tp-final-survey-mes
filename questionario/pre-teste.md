@@ -14,7 +14,7 @@ Sem nomes: apenas o perfil informado no formulário. O tempo de preenchimento fo
 | 4 | 06/11 | — | — | — | — | Respondeu "Não" no filtro e foi direto ao envio (desvio funcionou) |
 | 5 | 06/11 | Análise de dados / BI | 1 a 3 anos | 1.000+ / Varejo | 10–15 min | Completa, válida |
 
-Resumo: 5 participantes, 3 respostas válidas pelas regras de descarte. O pré-teste exercitou os dois desvios de página (TC1 e F1) e a pergunta de atenção.
+Resumo: 5 participantes e 2 respostas válidas pelas regras de descarte (a do participante 2 cai na regra de área fora da população, criada a partir deste pré-teste). O pré-teste exercitou o desvio de página do filtro (F1) e a pergunta de atenção. Todos os participantes concordaram com o TCLE, então o desvio de TC1 não foi exercitado.
 
 ## Mudanças feitas a partir do pré-teste
 
