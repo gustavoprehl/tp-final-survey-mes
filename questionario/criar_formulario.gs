@@ -119,7 +119,8 @@ function secaoFiltroEPerfil(form) {
 
   form.addMultipleChoiceItem()
     .setTitle('Há quanto tempo você trabalha com dados ou automação?')
-    .setChoiceValues(['Menos de 1 ano', '1 a 3 anos', '3 a 5 anos', '5 a 10 anos', 'Mais de 10 anos'])
+    .setChoiceValues(['Menos de 1 ano', 'De 1 a menos de 3 anos', 'De 3 a menos de 5 anos',
+      'De 5 a menos de 10 anos', '10 anos ou mais'])
     .setRequired(true);
 
   form.addMultipleChoiceItem()
@@ -258,6 +259,7 @@ function secaoAbertas(form) {
 
   form.addParagraphTextItem()
     .setTitle('Que métrica você gostaria de acompanhar nas suas entregas, mas hoje não consegue? Por quê?')
+    .setHelpText('Não inclua nomes de pessoas ou empresas.')
     .setRequired(false);
 
   form.addParagraphTextItem()

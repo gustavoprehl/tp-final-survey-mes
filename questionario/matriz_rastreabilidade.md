@@ -26,7 +26,7 @@ Codificação Likert: Discordo totalmente = 1 … Concordo totalmente = 5. Itens
 | TC1 | Você leu o termo acima e concorda em participar da pesquisa? | — | Consentimento | Nominal | "Não concordo" → descarte |
 | F1 | No seu trabalho atual, você cria ou mantém produtos de dados ou automação? | — | Pertencimento à população | Nominal | "Não" → descarte |
 | P1 | Qual é a sua área de atuação principal? | QP2 | Área de atuação | Nominal | Grupo da QP2; segmento do dashboard. Áreas com n < 5 são agrupadas em "Outras" |
-| P2 | Há quanto tempo você trabalha com dados ou automação? | QP4 | Tempo de experiência | Ordinal | 1 (< 1 ano) … 5 (> 10 anos); segmento |
+| P2 | Há quanto tempo você trabalha com dados ou automação? | QP4 | Tempo de experiência | Ordinal | 1 (menos de 1 ano), 2 (1 a < 3), 3 (3 a < 5), 4 (5 a < 10), 5 (10 anos ou mais); faixas sem sobreposição; segmento |
 | P3 | Qual é o porte da empresa em que você trabalha? | — | Porte da empresa | Ordinal | 1 … 4; "Não sei" = ausente; segmento |
 | P4 | Qual é o setor da empresa? | — | Setor | Nominal | Segmento; descritivo |
 | P5 | Quantas pessoas fazem parte do seu time direto (incluindo você)? | — | Tamanho do time | Razão | Descritivo (mediana, IIQ) |
@@ -51,8 +51,8 @@ Codificação Likert: Discordo totalmente = 1 … Concordo totalmente = 5. Itens
 
 | Construto | Itens | Escore | Confiabilidade |
 |---|---|---|---|
-| **UT**: utilidade percebida das métricas | UT1, UT2, UT3, UT4 (R) | Média dos 4 itens, tratada como ordinal nos testes | Alfa de Cronbach ≥ 0,70; se ficar abaixo, informar o alfa sem o item mais fraco |
-| **MM**: maturidade de medição do time | MM1, MM2, MM3, MM4 (R) | Média dos 4 itens, tratada como ordinal nos testes | Alfa de Cronbach ≥ 0,70 |
+| **UT**: utilidade percebida das métricas | UT1, UT2, UT3, UT4 (R) | Média dos 4 itens, tratada como ordinal nos testes | Alfa de Cronbach ≥ 0,70 (regras para valores menores na seção 5 do protocolo) |
+| **MM**: maturidade de medição do time | MM1, MM2, MM3, MM4 (R) | Média dos 4 itens, tratada como ordinal nos testes | Alfa de Cronbach ≥ 0,70 (regras para valores menores na seção 5 do protocolo) |
 
 ## Regras de descarte (ordem de aplicação)
 
