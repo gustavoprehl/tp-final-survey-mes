@@ -8,10 +8,11 @@ Na raiz do repositório (Windows):
 
 ```
 py -m venv .venv
-.venv\Scripts\activate
-pip install -r dashboard/requirements.txt
-streamlit run dashboard/app.py
+.venv\Scripts\python -m pip install -r dashboard/requirements.txt
+.venv\Scripts\streamlit run dashboard/app.py
 ```
+
+Os comandos chamam o Python e o Streamlit direto do `.venv`, sem `activate`. No PowerShell, o `activate` costuma ser bloqueado pela política de execução de scripts.
 
 ## Dados
 
