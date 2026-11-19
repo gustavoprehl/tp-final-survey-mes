@@ -26,10 +26,15 @@ Os comandos chamam o Python e o Streamlit direto do `.venv`, sem `activate`. No 
 |---|---|
 | `app.py` | Entrada: fonte de dados, filtros por segmento (barra lateral) e navegação |
 | `dados.py` | Leitura do CSV, códigos da matriz, codificação das escalas, escores UT/MM e descartes |
-| `paginas/perfil.py` | Respostas recebidas, válidas e descartadas por motivo; perfil da amostra (#19) |
-| `paginas/likert.py` | Barras divergentes dos itens Likert (#20) |
-| `paginas/questoes.py` | QP1–QP4 com teste, p-valor, tamanho de efeito e margem de erro (#18, #22) |
-| `paginas/confiabilidade.py` | Alfa de Cronbach (#21) |
-| `paginas/metodologia.py` | Pré-registro, desvios (`docs/DESVIOS.md`) e limitações (#23) |
+| `estatistica.py` | Margem de erro, Holm, Kruskal-Wallis + ε², Dunn, Mann-Whitney + r rank-biserial, Spearman, alfa de Cronbach (IC de Feldt) |
+| `analises.py` | Aplica os testes às QPs; família principal (QP2, QP3, QP4) com Holm na amostra completa |
+| `componentes.py` | Formatação em português, cartão de resultado de teste e bloqueio de filtros com n < 5 |
+| `paginas/perfil.py` | Recebidas, válidas e descartes por motivo; respostas por dia; perfil (P1–P6) |
+| `paginas/likert.py` | Barras divergentes de UT e MM, mediana e IIQ por item |
+| `paginas/questoes.py` | QP1–QP4: visualização, teste, p-valor bruto e ajustado, tamanho de efeito, n e margem de erro |
+| `paginas/confiabilidade.py` | Alfa de Cronbach com IC 95%, decisão pela regra da seção 5, alfa sem cada item |
+| `paginas/metodologia.py` | Pré-registro, desenho do estudo, desvios (`docs/DESVIOS.md`), limitações e divulgação |
+
+Com filtro ativo, os testes da família principal continuam calculados na amostra completa; o recálculo no segmento aparece à parte, como exploratório e sem Holm (seção 5).
 
 As páginas leem de `st.session_state` três tabelas: `respostas` (todas, com `motivo_descarte`), `validas` e `filtradas` (válidas com os filtros da barra lateral aplicados).
