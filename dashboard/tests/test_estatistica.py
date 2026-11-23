@@ -86,6 +86,11 @@ def test_cronbach_e_ic_feldt():
     assert tabela["Alfa sem o item"].notna().all()
 
 
+def test_cronbach_sem_variancia_devolve_nan():
+    itens = pd.DataFrame({"i1": [3, 3, 3], "i2": [3, 3, 3]})
+    assert np.isnan(est.cronbach(itens)["alfa"])
+
+
 @pytest.mark.parametrize("alfa, inicio", [(0.75, "Aceito"), (0.65, "Usado com limitação"), (0.5, "Abaixo")])
 def test_decisao_cronbach(alfa, inicio):
     assert est.decisao_cronbach(alfa).startswith(inicio)
