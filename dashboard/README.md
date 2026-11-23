@@ -14,6 +14,15 @@ py -m venv .venv
 
 Os comandos chamam o Python e o Streamlit direto do `.venv`, sem `activate`. No PowerShell, o `activate` costuma ser bloqueado pela política de execução de scripts.
 
+## Testes
+
+O módulo estatístico é conferido contra valores de referência do pingouin e do scikit-posthocs e com os dados sintéticos:
+
+```
+.venv\Scripts\python -m pip install -r dashboard/requirements-dev.txt
+.venv\Scripts\python -m pytest dashboard/tests
+```
+
 ## Dados
 
 - **Reais:** exporte a planilha de respostas (Arquivo → Fazer download → CSV) e salve em `dados/brutos/`, já anonimizada (seção 6). O dashboard usa o CSV mais recente dessa pasta.
@@ -28,7 +37,8 @@ Os comandos chamam o Python e o Streamlit direto do `.venv`, sem `activate`. No 
 | `dados.py` | Leitura do CSV, códigos da matriz, codificação das escalas, escores UT/MM e descartes |
 | `estatistica.py` | Margem de erro, Holm, Kruskal-Wallis + ε², Dunn, Mann-Whitney + r rank-biserial, Spearman, alfa de Cronbach (IC de Feldt) |
 | `analises.py` | Aplica os testes às QPs; família principal (QP2, QP3, QP4) com Holm na amostra completa |
-| `componentes.py` | Formatação em português, cartão de resultado de teste e bloqueio de filtros com n < 5 |
+| `componentes.py` | Formatação em português, cartão de resultado de teste (com aviso quando o menor grupo tem n < 5) e bloqueio de filtros com n < 5 |
+| `tests/` | Testes do módulo estatístico (pytest) |
 | `paginas/perfil.py` | Recebidas, válidas e descartes por motivo; respostas por dia; perfil (P1–P6) |
 | `paginas/likert.py` | Barras divergentes de UT e MM, mediana e IIQ por item |
 | `paginas/questoes.py` | QP1–QP4: visualização, teste, p-valor bruto e ajustado, tamanho de efeito, n e margem de erro |

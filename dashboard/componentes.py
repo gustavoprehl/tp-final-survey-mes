@@ -45,6 +45,10 @@ def cartao_teste(nome, resultado, rotulo_estatistica, rotulo_efeito, limiares, p
     colunas[3].metric(rotulo_efeito, num(resultado["efeito"], 3),
                       est.magnitude(resultado["efeito"], limiares), delta_color="off")
     colunas[4].metric("n", resultado["n"])
+    n_min = resultado.get("n_min")
+    if n_min is not None and n_min < est.N_MIN_GRUPO:
+        st.warning(f"O menor grupo deste teste tem {n_min} resposta(s), abaixo de {est.N_MIN_GRUPO}. "
+                   "Com tão poucas respostas o teste tem pouco poder e o resultado não deve ser interpretado.")
     referencia = resultado["p"] if p_ajustado is None else p_ajustado
     if referencia < est.ALFA:
         st.success(f"**{nome}:** rejeita H0 com α = 0,05"

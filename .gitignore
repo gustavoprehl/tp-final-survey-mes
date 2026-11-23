@@ -17,3 +17,4 @@ Thumbs.db
 
 # HTML intermediário do gerador de PDF
 protocolo/*.html
+.pytest_cache/
