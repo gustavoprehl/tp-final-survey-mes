@@ -66,7 +66,8 @@ def kruskal_wallis(valores, grupos):
     amostras = [g["v"].to_numpy() for _, g in dados.groupby("g")]
     h, p = stats.kruskal(*amostras)
     n = len(dados)
-    return {"estatistica": h, "p": p, "efeito": h / (n - 1), "n": n, "k": len(amostras)}
+    return {"estatistica": h, "p": p, "efeito": h / (n - 1), "n": n, "k": len(amostras),
+            "n_min": min(len(a) for a in amostras)}
 
 
 def dunn(valores, grupos):
@@ -100,13 +101,14 @@ def mann_whitney(valores, grupos, grupo_a, grupo_b, alternativa="less"):
         raise ValueError(f"o grupo \"{grupo_a if len(a) == 0 else grupo_b}\" não tem respostas")
     u, p = stats.mannwhitneyu(a, b, alternative=alternativa)
     return {"estatistica": u, "p": p, "efeito": 2 * u / (len(a) * len(b)) - 1,
-            "n": len(a) + len(b), "n_a": len(a), "n_b": len(b)}
+            "n": len(a) + len(b), "n_a": len(a), "n_b": len(b), "n_min": min(len(a), len(b))}
 
 
 def spearman(x, y):
+    """Correlação de Spearman; o próprio ρ é o tamanho de efeito."""
     dados = pd.DataFrame({"x": x, "y": y}).dropna()
     rho, p = stats.spearmanr(dados["x"], dados["y"])
-    return {"estatistica": rho, "p": p, "efeito": rho, "n": len(dados)}
+    return {"estatistica": rho, "p": p, "efeito": rho, "n": len(dados), "n_min": len(dados)}
 
 
 def cronbach(itens):
