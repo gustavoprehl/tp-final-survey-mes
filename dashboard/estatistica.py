@@ -116,6 +116,8 @@ def cronbach(itens):
     itens = itens.dropna()
     n, k = itens.shape
     variancia_total = itens.sum(axis=1).var(ddof=1)
+    if n < 2 or not variancia_total > 0:  # todos responderam igual: alfa indefinido
+        return {"alfa": np.nan, "ic_inf": np.nan, "ic_sup": np.nan, "n": n, "k": k}
     alfa = k / (k - 1) * (1 - itens.var(ddof=1).sum() / variancia_total)
     gl1, gl2 = n - 1, (n - 1) * (k - 1)
     inferior = 1 - (1 - alfa) * stats.f.ppf(0.975, gl1, gl2)
