@@ -134,3 +134,20 @@ def test_qp1_proporcoes_entre_0_e_1(validas_sinteticas):
     tabela, _, _ = analises.qp1(validas_sinteticas)
     assert tabela["Proporção"].between(0, 1).all()
     assert (tabela["IC inferior"] <= tabela["Proporção"]).all()
+
+
+def test_conclusao_qp3_significativa_e_nao():
+    r = {"teste": "Mann-Whitney U unilateral", "p": 0.01, "efeito": -0.4, "limiares": est.LIMIARES_R}
+    assert analises.conclusao("QP3", r).startswith("Quem mede")
+    assert analises.conclusao("QP3", r, p_ref=0.2).startswith("Não há evidência")
+
+
+def test_conclusao_qp4_indica_sentido():
+    r = {"teste": "Correlação de Spearman", "p": 0.001, "efeito": -0.35, "limiares": est.LIMIARES_R}
+    assert "menor" in analises.conclusao("QP4", r)
+
+
+def test_conclusao_qp2_cita_pares_dunn():
+    r = {"teste": "Kruskal-Wallis", "p": 0.001, "efeito": 0.2, "limiares": est.LIMIARES_EPSILON2}
+    assert "BI e CRM" in analises.conclusao("QP2", r, pares_dunn=[("BI", "CRM")])
+    assert "difusa" in analises.conclusao("QP2", r, pares_dunn=[])

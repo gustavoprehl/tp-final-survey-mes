@@ -16,6 +16,9 @@ ui.aviso_filtro(filtradas, validas)
 ui.exigir_n_minimo(filtradas)
 
 familia = analises.familia_principal(validas)
+if filtro_ativo:
+    st.caption("Os gráficos e tabelas descritivas de cada aba seguem o filtro; o teste e a conclusão principais "
+               "usam a amostra completa. O teste no segmento fica no quadro \"Recalculado no filtro atual\".")
 
 st.subheader("Família principal (amostra completa, α = 0,05, correção de Holm)")
 st.dataframe(pd.DataFrame([{
@@ -28,7 +31,7 @@ st.caption(f"Margem de erro das proporções com n = {len(validas)}: ± {ui.num(
            "(pior caso, p = 0,5). Efeitos: ε² ≈ 0,01 / 0,06 / 0,14 e r, ρ ≈ 0,1 / 0,3 / 0,5 para pequeno / médio / grande.")
 
 
-def exploratorio(funcao, rotulo_estatistica, rotulo_efeito):
+def exploratorio(qp, funcao, rotulo_estatistica, rotulo_efeito):
     """Recalcula o teste no segmento filtrado, sem correção de Holm."""
     if not filtro_ativo:
         return
@@ -36,6 +39,7 @@ def exploratorio(funcao, rotulo_estatistica, rotulo_efeito):
         try:
             r = funcao(filtradas)
             ui.cartao_teste("Segmento filtrado", r, rotulo_estatistica, rotulo_efeito, r["limiares"])
+            st.markdown(f"**Leitura no segmento (exploratória):** {analises.conclusao(qp, r)}")
         except ValueError as erro:
             st.warning(f"Não é possível calcular o teste neste segmento: {erro}")
 
@@ -87,14 +91,18 @@ with abas[1]:
     r = familia["QP2"]
     ui.cartao_teste(f"QP2 ({r['teste']})", r, "H de Kruskal-Wallis" if r["teste"] == "Kruskal-Wallis" else "U",
                     "ε²" if r["teste"] == "Kruskal-Wallis" else "r rank-biserial", r["limiares"], r["p_ajustado"])
+    pares_dunn = None
     if r["teste"] == "Kruskal-Wallis" and r["p_ajustado"] < est.ALFA:
-        st.markdown("**Pós-teste de Dunn (bicaudal, Holm entre os pares, amostra completa)**")
         tabela_dunn = est.dunn(validas["UT"], analises.grupos_qp2(validas))
         tabela_dunn["Diferença"] = tabela_dunn["p ajustado (Holm)"] < est.ALFA
+        pares_dunn = list(tabela_dunn.loc[tabela_dunn["Diferença"], ["Grupo A", "Grupo B"]].itertuples(index=False, name=None))
+    st.info(f"**Conclusão:** {analises.conclusao('QP2', r, r['p_ajustado'], pares_dunn)}")
+    if pares_dunn is not None:
+        st.markdown("**Pós-teste de Dunn (bicaudal, Holm entre os pares, amostra completa)**")
         st.dataframe(tabela_dunn.assign(z=tabela_dunn["z"].round(2), p=tabela_dunn["p"].map(ui.p_valor),
                                         **{"p ajustado (Holm)": tabela_dunn["p ajustado (Holm)"].map(ui.p_valor)}),
                      hide_index=True, width="stretch")
-    exploratorio(analises.qp2, "Estatística", "Efeito")
+    exploratorio("QP2", analises.qp2, "Estatística", "Efeito")
 
 with abas[2]:
     st.subheader("Quem mede a qualidade dos dados de forma estruturada relata menos retrabalho?")
@@ -113,6 +121,7 @@ with abas[2]:
                "r negativo indica menos retrabalho no grupo \"Mede\".")
     r = familia["QP3"]
     ui.cartao_teste("QP3 (Mann-Whitney U unilateral, M3)", r, "U", "r rank-biserial", r["limiares"], r["p_ajustado"])
+    st.info(f"**Conclusão:** {analises.conclusao('QP3', r, r['p_ajustado'])}")
     st.markdown("**Análise secundária: nº de falhas nos últimos 30 dias (M4), fora da família principal**")
     secundaria = analises.qp3(validas, "M4_num")
     medianas = validas.groupby("M2_grupo")["M4_num"].median()
@@ -121,7 +130,7 @@ with abas[2]:
     ui.cartao_teste("M4 (secundária)", secundaria, "U", "r rank-biserial", secundaria["limiares"])
     st.caption("A QP3 é uma associação, não uma relação de causa: porte, setor e tipo de entrega podem influenciar "
                "os dois lados (seção 7).")
-    exploratorio(analises.qp3, "U", "r rank-biserial")
+    exploratorio("QP3", analises.qp3, "U", "r rank-biserial")
 
 with abas[3]:
     st.subheader("A maturidade de medição do time está associada ao tempo de experiência do profissional?")
@@ -134,4 +143,5 @@ with abas[3]:
                "(1 = menos de 1 ano … 5 = 10 anos ou mais).")
     r = familia["QP4"]
     ui.cartao_teste("QP4 (Spearman)", r, "ρ de Spearman", "ρ", r["limiares"], r["p_ajustado"])
-    exploratorio(analises.qp4, "ρ", "ρ")
+    st.info(f"**Conclusão:** {analises.conclusao('QP4', r, r['p_ajustado'])}")
+    exploratorio("QP4", analises.qp4, "ρ", "ρ")

@@ -54,3 +54,51 @@ def familia_principal(df):
     for r, p_aj in zip(resultados.values(), ajustados):
         r["p_ajustado"] = p_aj
     return resultados
+
+
+def _fmt(valor, casas=2):
+    return f"{valor:.{casas}f}".replace(".", ",")
+
+
+def conclusao(qp, r, p_ref=None, pares_dunn=None):
+    """Conclusão em linguagem simples para QP2, QP3 e QP4.
+
+    p_ref é o p-valor usado na decisão (o ajustado por Holm na família principal;
+    o bruto no recálculo exploratório). pares_dunn lista os pares de áreas com
+    diferença após o Dunn.
+    """
+    p_ref = r["p"] if p_ref is None else p_ref
+    significativo = p_ref < est.ALFA
+    forca = est.magnitude(r["efeito"], r["limiares"])
+    simbolo = "ε²" if r["teste"] == "Kruskal-Wallis" else "ρ" if qp == "QP4" else "r"
+    efeito = f"efeito {forca}, {simbolo} = {_fmt(r['efeito'])}"
+    ressalva = " Com efeito desprezível, a diferença tem pouca relevância prática." if forca == "desprezível" else ""
+
+    if qp == "QP2":
+        if not significativo:
+            return (f"Não há evidência de que a utilidade percebida das métricas mude entre as áreas ({efeito}). "
+                    "Isso não prova que as áreas sejam iguais, só que a amostra não mostrou diferença.")
+        texto = f"A utilidade percebida das métricas difere entre as áreas de atuação ({efeito}).{ressalva}"
+        if pares_dunn:
+            texto += " Pelo pós-teste de Dunn, a diferença aparece entre " + "; ".join(
+                f"{a} e {b}" for a, b in pares_dunn) + "."
+        elif pares_dunn is not None:
+            texto += " Nenhum par de áreas se separa após a correção de Holm no Dunn: a diferença é difusa."
+        return texto
+
+    if qp == "QP3":
+        if significativo and r["efeito"] < 0:
+            return (f"Quem mede a qualidade dos dados de forma estruturada relata menos retrabalho ({efeito}).{ressalva} "
+                    "É uma associação, não prova que medir reduza o retrabalho.")
+        return (f"Não há evidência de que quem mede a qualidade dos dados relate menos retrabalho ({efeito}). "
+                "Isso não prova que os grupos sejam iguais.")
+
+    if qp == "QP4":
+        if not significativo:
+            return (f"Não há evidência de associação entre a maturidade de medição do time e a experiência do "
+                    f"profissional ({efeito}). Isso não prova que a associação seja nula.")
+        sentido = "maior" if r["efeito"] > 0 else "menor"
+        return (f"Quanto mais experiente o profissional, {sentido} tende a ser a maturidade de medição do time "
+                f"({efeito}).{ressalva} É uma associação, não uma relação de causa.")
+
+    raise ValueError(f"QP desconhecida: {qp}")
