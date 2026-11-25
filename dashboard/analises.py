@@ -149,3 +149,46 @@ def conclusao(qp, r, p_ref=None, pares_dunn=None):
                 f"({efeito}).{ressalva} É uma associação, não uma relação de causa.")
 
     raise ValueError(f"QP desconhecida: {qp}")
+
+
+def _separar_codigos(serie):
+    """"USUARIO;NEGOCIO" -> {"USUARIO", "NEGOCIO"}; vazio -> conjunto vazio."""
+    return serie.map(lambda t: {c.strip() for c in t.split(";") if c.strip()} if isinstance(t, str) else set())
+
+
+def concordancia_a1(cod, dimensao):
+    """Concordância entre os dois codificadores da A1 em uma dimensão (seção 5).
+
+    Como uma resposta pode ter mais de um código, o kappa é calculado sobre as
+    decisões código a código (presente ou ausente em cada resposta). A
+    concordância simples é a fração de respostas com exatamente os mesmos códigos.
+    Devolve None enquanto o segundo codificador não terminou.
+    """
+    a = _separar_codigos(cod[f"{dimensao}_arthur"])
+    b = _separar_codigos(cod[f"{dimensao}_gustavo"])
+    if b.map(len).eq(0).any():
+        return None
+    codigos = dados.CODIGOS_A1[dimensao]
+    decisoes_a = [c in s for s in a for c in codigos]
+    decisoes_b = [c in s for s in b for c in codigos]
+    kappa = est.kappa_cohen(decisoes_a, decisoes_b)
+    return {"kappa": kappa, "interpretacao": est.interpretar_kappa(kappa),
+            "concordancia": (a == b).mean(), "n": len(cod), "divergencias": cod.loc[a != b, "timestamp"]}
+
+
+def frequencia_codigos_a1(cod, df, dimensao):
+    """Respostas de df (válidas, com filtro) em cada código da A1.
+
+    Usa os códigos finais (consenso); enquanto não existem, os do codificador
+    principal, e o retorno indica que o resultado é provisório.
+    """
+    final = cod[f"{dimensao}_final"]
+    provisorio = final.isna().any()
+    coluna = cod[f"{dimensao}_arthur"] if provisorio else final
+    codigos = _separar_codigos(coluna)[cod["timestamp"].isin(df["timestamp"]).values]
+    n = len(codigos)
+    linhas = [{"Código": rotulo, "Respostas": int(sum(c in s for s in codigos)),
+               "Proporção": sum(c in s for s in codigos) / n if n else 0}
+              for c, rotulo in dados.CODIGOS_A1[dimensao].items()]
+    tabela = pd.DataFrame(linhas).sort_values("Respostas", ascending=False, ignore_index=True)
+    return tabela, n, provisorio

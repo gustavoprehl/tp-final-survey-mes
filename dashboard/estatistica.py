@@ -111,6 +111,31 @@ def spearman(x, y):
     return {"estatistica": rho, "p": p, "efeito": rho, "n": len(dados), "n_min": len(dados)}
 
 
+LIMIARES_KAPPA = [(0.20, "fraca"), (0.40, "razoável"), (0.60, "moderada"), (0.80, "substancial")]
+KAPPA_MINIMO = 0.60  # seção 5
+
+
+def kappa_cohen(a, b):
+    """Kappa de Cohen entre dois codificadores (mesmos itens, na mesma ordem)."""
+    a, b = np.asarray(a), np.asarray(b)
+    categorias = np.union1d(a, b)
+    observada = np.mean(a == b)
+    esperada = sum(np.mean(a == c) * np.mean(b == c) for c in categorias)
+    if esperada == 1:  # os dois usaram uma única categoria: kappa indefinido
+        return np.nan
+    return (observada - esperada) / (1 - esperada)
+
+
+def interpretar_kappa(kappa):
+    """Faixas de Landis e Koch (1977)."""
+    if np.isnan(kappa):
+        return "—"
+    for limite, rotulo in LIMIARES_KAPPA:
+        if kappa < limite:
+            return rotulo
+    return "quase perfeita"
+
+
 def cronbach(itens):
     """Alfa de Cronbach com IC 95% de Feldt."""
     itens = itens.dropna()

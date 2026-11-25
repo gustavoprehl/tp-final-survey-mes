@@ -1,0 +1,20 @@
+timestamp,valida,resposta_A1,metrica_gustavo,barreira_gustavo
+13/11/2026 16:12:12,sim,KPIs de conversão das campanhas/réguas feitas,IMP,NI
+13/11/2026 16:12:58,sim,quantos e-mails caem definitivamente para spam / deficiência da ferramenta em entender se o envio foi completo ou foi pra spam,ENV,FER
+13/11/2026 17:05:14,sim,Métricas que perseguem o OKR definido do projeto,IMP,NI
+13/11/2026 18:48:40,sim,"Métricas de escala do produto, não consigo por limitações técnicas",DES,FER
+14/11/2026 20:43:59,sim,"Utilizamos uma métrica de SLA para as entregas, entretanto o prazo de entrega de um chamado simples de primeiro nível é o mesmo de um projeto longo. Seria interessante ter essa separação nos sistemas e consequentemente nos dashboards.",ENT,FER
+15/11/2026 17:14:50,sim,"NPS dos usuários internos - atualmente nem todos respondem
+
+Aderência ao planejado mensal - nem todos os responsáveis fazem plano de budget mensal, mas sim por trimestre",SAT;ENT,PRO
+15/11/2026 17:14:51,não,Algo relacionado à conversão de capital para projetos selecionados em editais estatais.,IMP,NI
+15/11/2026 17:16:44,sim,"Qualidade dos dados hoje não é possível de medir devido a falta de ferramentas que tornem esse processo prático, automático e viável em larga escala.",QLD,FER
+15/11/2026 21:13:46,sim,Métricas de desempenho,GEN,NI
+15/11/2026 22:18:49,sim,.,SEM,NI
+17/11/2026 13:27:08,sim,n/a,SEM,NI
+17/11/2026 15:42:36,sim,Valor em relação ao meu nível de carreira,IND,NI
+17/11/2026 19:49:11,sim,Meu resultado,IND,NI
+17/11/2026 23:04:39,sim,Não tenho nenhuma ideia.,SEM,NI
+17/11/2026 23:32:56,sim,Dados dos ativos (torres). Ainda em processo de sanitizacao da base de ativos,QLD,DAD
+19/11/2026 16:02:42,sim,A usabilidade nos milhares de dashboards,USO,NI
+23/11/2026 13:38:09,sim,Eficácia dos testes,TES,NI

@@ -27,6 +27,7 @@ O módulo estatístico é conferido contra valores de referência do pingouin e 
 
 - **Reais:** exporte a planilha de respostas (Arquivo → Fazer download → CSV) e salve em `dados/brutos/`, já anonimizada (seção 6). O dashboard usa o CSV mais recente dessa pasta.
 - **Sintéticos:** sem CSV em `dados/brutos/`, o dashboard usa `dados/sinteticos/respostas_sinteticas.csv` e mostra um aviso. Para gerar de novo: `python dados/sinteticos/gerar_sinteticos.py`.
+- **Codificação da A1 (#25):** `dados/codificacao_A1.csv`, uma linha por resposta, com os códigos de cada codificador no livro unificado e os finais de consenso (livro em `questionario/codificacao.md`; a codificação aberta original do segundo codificador fica em `dados/codificacao_A1_gustavo_original.csv`). O dashboard mostra a frequência dos códigos finais na aba QP1 e o kappa entre os codificadores.
 - **Fora da população (regra 2):** respostas com área "Outra" julgadas fora da população vão em `dados/descartes_fora_populacao.csv`, com as colunas `timestamp`, `decisao_1` e `decisao_2` (`fora` ou `dentro`). Só sai a resposta que os dois pesquisadores marcaram como `fora`.
 
 ## Estrutura
@@ -38,7 +39,7 @@ O módulo estatístico é conferido contra valores de referência do pingouin e 
 | `estatistica.py` | Margem de erro, Holm, Kruskal-Wallis + ε², Dunn, Mann-Whitney + r rank-biserial, Spearman, alfa de Cronbach (IC de Feldt) |
 | `analises.py` | Aplica os testes às QPs; família principal (QP2, QP3, QP4) com Holm na amostra completa |
 | `componentes.py` | Formatação em português, cartão de resultado de teste (com aviso quando o menor grupo tem n < 5) e bloqueio de filtros com n < 5 |
-| `tests/` | Testes do módulo estatístico e do pipeline de limpeza (cada regra de descarte, codificação das escalas, grades iguais) (pytest) |
+| `tests/` | Testes do módulo estatístico, do pipeline de limpeza (cada regra de descarte, codificação das escalas, grades iguais) e da codificação da A1 (pytest) |
 | `paginas/perfil.py` | Recebidas, válidas e descartes por motivo; respostas por dia; perfil (P1–P6) |
 | `paginas/likert.py` | Barras divergentes de UT e MM, mediana e IIQ por item |
 | `paginas/questoes.py` | QP1–QP4: visualização, teste, p-valor bruto e ajustado, tamanho de efeito, n e margem de erro |
