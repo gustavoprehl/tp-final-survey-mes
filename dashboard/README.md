@@ -58,6 +58,8 @@ As páginas leem de `st.session_state` três tabelas: `respostas` (todas, com `m
 
 ## Deploy (Streamlit Community Cloud)
 
+App publicado: https://tp-final-survey-mes.streamlit.app/ (privado; quem vê é definido em **Settings → Sharing**).
+
 O repositório já está pronto: `dashboard/requirements.txt` fica ao lado do `app.py` (é onde o Cloud procura) e `.streamlit/config.toml` fica na raiz.
 
 1. Acesse https://share.streamlit.io e entre com a conta do GitHub dona do repositório. Autorize o acesso a repositórios privados.

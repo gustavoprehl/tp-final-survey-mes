@@ -1,6 +1,6 @@
 # Roteiro da defesa (26/11/2026)
 
-Dashboard: `.venv\Scripts\streamlit run dashboard/app.py` (ou o link do Streamlit Cloud). Plano B: capturas de cada página.
+Dashboard: **https://tp-final-survey-mes.streamlit.app/** (privado: entrar com a conta convidada). Plano B: rodar local com `.venv\Scripts\streamlit run dashboard/app.py`. Plano C: capturas de cada página.
 
 ## Resultados em uma frase cada
 
