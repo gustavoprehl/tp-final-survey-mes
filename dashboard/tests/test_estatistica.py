@@ -111,12 +111,6 @@ def test_agrupar_areas_junta_pequenas_em_outras():
     assert set(est.agrupar_areas(areas)) == {"BI", "Outras"}
 
 
-@pytest.fixture(scope="module")
-def validas_sinteticas():
-    df = dados.processar(dados.PASTA_SINTETICOS / "respostas_sinteticas.csv")
-    return df[df["motivo_descarte"].isna()]
-
-
 def test_familia_principal_nos_sinteticos(validas_sinteticas):
     familia = analises.familia_principal(validas_sinteticas)
     assert list(familia) == ["QP2", "QP3", "QP4"]

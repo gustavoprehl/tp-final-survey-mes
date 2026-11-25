@@ -21,19 +21,54 @@ def qp1(df):
     return tabela, outro.dropna(), int(conflito.sum())
 
 
+CONSTRUTOS = {"UT": dados.ITENS_UT, "MM": dados.ITENS_MM}
+
+
+def regra_cronbach(validas):
+    """Aplica a regra de confiabilidade da seção 5, uma única vez, na amostra completa.
+
+    α ≥ 0,60: o escore usa os quatro itens. α < 0,60: se tirar um item leva a α ≥ 0,70,
+    o escore é calculado sem ele; senão, a QP do construto é analisada item a item.
+    """
+    decisoes = {}
+    for nome, itens in CONSTRUTOS.items():
+        colunas = [f"{i}_num" for i in itens]
+        alfa = est.cronbach(validas[colunas])["alfa"]
+        decisao = {"alfa": alfa, "itens": itens, "removido": None, "alfa_final": alfa, "item_a_item": False}
+        if alfa < 0.60:
+            tabela = est.alfa_sem_item(validas[colunas])
+            melhor = tabela.loc[tabela["Alfa sem o item"].idxmax()]
+            if melhor["Alfa sem o item"] >= 0.70:
+                removido = melhor["Item"].removesuffix("_num")
+                decisao.update(itens=[i for i in itens if i != removido], removido=removido,
+                               alfa_final=melhor["Alfa sem o item"])
+            else:
+                decisao["item_a_item"] = True
+        decisoes[nome] = decisao
+    return decisoes
+
+
+def aplicar_escores(df, decisoes):
+    """Recalcula os escores UT e MM só com os itens mantidos pela regra de confiabilidade."""
+    df = df.copy()
+    for nome, decisao in decisoes.items():
+        df[nome] = df[[f"{i}_num" for i in decisao["itens"]]].mean(axis=1, skipna=False)
+    return df
+
+
 def grupos_qp2(df):
     return est.agrupar_areas(df["P1_grupo"])
 
 
-def qp2(df):
+def qp2(df, variavel="UT"):
     grupos = grupos_qp2(df)
     if grupos.nunique() < 2:
         raise ValueError("há só uma área no filtro, então não há grupos para comparar")
     if grupos.nunique() == 2:  # desvio previsto na seção 5
         a, b = sorted(grupos.unique())
-        r = est.mann_whitney(df["UT"], grupos, a, b, alternativa="two-sided")
+        r = est.mann_whitney(df[variavel], grupos, a, b, alternativa="two-sided")
         return {**r, "teste": "Mann-Whitney U (só 2 grupos)", "limiares": est.LIMIARES_R}
-    r = est.kruskal_wallis(df["UT"], grupos)
+    r = est.kruskal_wallis(df[variavel], grupos)
     return {**r, "teste": "Kruskal-Wallis", "limiares": est.LIMIARES_EPSILON2}
 
 
@@ -42,14 +77,26 @@ def qp3(df, variavel="M3_num"):
     return {**r, "teste": "Mann-Whitney U unilateral", "limiares": est.LIMIARES_R}
 
 
-def qp4(df):
-    r = est.spearman(df["MM"], df["P2_num"])
+def qp4(df, variavel="MM"):
+    r = est.spearman(df[variavel], df["P2_num"])
     return {**r, "teste": "Correlação de Spearman", "limiares": est.LIMIARES_R}
 
 
-def familia_principal(df):
-    """QP2, QP3 (M3) e QP4 na amostra completa, com Holm entre os três testes."""
-    resultados = {"QP2": qp2(df), "QP3": qp3(df), "QP4": qp4(df)}
+def familia_principal(df, decisoes=None):
+    """QP2, QP3 (M3) e QP4 na amostra completa, com Holm entre todos os testes da família.
+
+    Se a regra de confiabilidade mandar analisar um construto item a item, a QP
+    correspondente vira um teste por item ("QP4 · MM1"…), marcado como exploratório.
+    """
+    decisoes = decisoes or {}
+
+    def por_construto(qp, funcao, construto):
+        if not decisoes.get(construto, {}).get("item_a_item"):
+            return {qp: funcao(df, construto)}
+        return {f"{qp} · {item}": {**funcao(df, f"{item}_num"), "exploratoria": True}
+                for item in CONSTRUTOS[construto]}
+
+    resultados = {**por_construto("QP2", qp2, "UT"), "QP3": qp3(df), **por_construto("QP4", qp4, "MM")}
     ajustados = est.holm([r["p"] for r in resultados.values()])
     for r, p_aj in zip(resultados.values(), ajustados):
         r["p_ajustado"] = p_aj

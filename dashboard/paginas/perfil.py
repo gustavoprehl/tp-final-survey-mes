@@ -55,7 +55,7 @@ def barras(coluna, titulo, ordem=None):
 
 c1, c2 = st.columns(2)
 with c1:
-    barras("P1_grupo", "Área de atuação", dados.AREAS + ["Outra"])
+    barras("P1_grupo", "Área de atuação", dados.AREAS + [dados.OUTRA])
     barras("P3", "Porte da empresa", dados.PORTE + ["Não sei"])
 with c2:
     barras("P2", "Tempo de experiência", dados.EXPERIENCIA)

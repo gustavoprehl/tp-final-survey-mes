@@ -83,6 +83,7 @@ METRICAS = [
     "Satisfação de quem usa ou solicita a entrega",
     "Nenhuma métrica é acompanhada com regularidade",
 ]
+OUTRA = "Outra (texto livre)"  # P1 respondida em "Outro"
 QUALIDADE = ["Sim, de forma automatizada", "Sim, de forma manual", "Não", "Não sei"]
 RETRABALHO = ["Nunca", "Raramente", "Às vezes", "Frequentemente", "Sempre"]
 
@@ -146,7 +147,7 @@ def separar_multipla(serie, opcoes):
 def codificar(df):
     """Acrescenta as versões numéricas das escalas e os escores dos construtos."""
     df = df.copy()
-    df["P1_grupo"] = df["P1"].where(df["P1"].isin(AREAS) | df["P1"].isna(), "Outra")
+    df["P1_grupo"] = df["P1"].where(df["P1"].isin(AREAS) | df["P1"].isna(), OUTRA)
     df["P2_num"] = df["P2"].map({t: i for i, t in enumerate(EXPERIENCIA, 1)})
     df["P3_num"] = df["P3"].map({t: i for i, t in enumerate(PORTE, 1)})
     df["M3_num"] = df["M3"].map({t: i for i, t in enumerate(RETRABALHO, 1)})
@@ -204,8 +205,12 @@ def processar(caminho):
 
 
 def localizar_fonte():
-    """Usa o CSV mais recente de dados/brutos; sem ele, os dados sintéticos."""
-    brutos = sorted(PASTA_BRUTOS.glob("*.csv"), key=lambda p: p.stat().st_mtime)
+    """Usa o CSV mais recente de dados/brutos; sem ele, os dados sintéticos.
+
+    "Mais recente" é pelo nome (respostas_AAAA-MM-DD.csv), porque no servidor de
+    deploy todos os arquivos do git têm a mesma data de modificação.
+    """
+    brutos = sorted(PASTA_BRUTOS.glob("*.csv"))
     if brutos:
         return brutos[-1], False
     return PASTA_SINTETICOS / "respostas_sinteticas.csv", True

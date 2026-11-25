@@ -4,6 +4,7 @@ Executar na raiz do repositório:  streamlit run dashboard/app.py
 """
 import streamlit as st
 
+import analises
 import dados
 
 st.set_page_config(page_title="Survey: métricas em produtos de dados", page_icon="📊", layout="wide")
@@ -17,6 +18,9 @@ def carregar(caminho, _modificado_em):
 fonte, sintetico = dados.localizar_fonte()
 respostas = carregar(fonte, fonte.stat().st_mtime)
 validas = respostas[respostas["motivo_descarte"].isna()]
+# A regra de confiabilidade (seção 5) é decidida na amostra completa e vale para todas as páginas
+construtos = analises.regra_cronbach(validas)
+validas = analises.aplicar_escores(validas, construtos)
 
 if sintetico:
     st.warning("**DADOS SINTÉTICOS.** Nenhum CSV em `dados/brutos/`: o dashboard está usando respostas "
@@ -26,7 +30,7 @@ if sintetico:
 with st.sidebar:
     st.header("Filtros")
     filtros = {
-        "P1_grupo": ("Área de atuação", dados.AREAS + ["Outra"]),
+        "P1_grupo": ("Área de atuação", dados.AREAS + [dados.OUTRA]),
         "P2": ("Tempo de experiência", dados.EXPERIENCIA),
         "P3": ("Porte da empresa", dados.PORTE + ["Não sei"]),
         "P4": ("Setor", sorted(validas["P4"].dropna().unique())),
@@ -41,6 +45,7 @@ with st.sidebar:
 
 st.session_state["respostas"] = respostas
 st.session_state["validas"] = validas
+st.session_state["construtos"] = construtos
 st.session_state["filtradas"] = filtradas
 
 pagina = st.navigation([

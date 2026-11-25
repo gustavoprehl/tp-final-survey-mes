@@ -15,20 +15,34 @@ st.title("Questões de pesquisa")
 ui.aviso_filtro(filtradas, validas)
 ui.exigir_n_minimo(filtradas)
 
-familia = analises.familia_principal(validas)
+construtos = st.session_state["construtos"]
+familia = analises.familia_principal(validas, construtos)
 if filtro_ativo:
     st.caption("Os gráficos e tabelas descritivas de cada aba seguem o filtro; o teste e a conclusão principais "
                "usam a amostra completa. O teste no segmento fica no quadro \"Recalculado no filtro atual\".")
 
 st.subheader("Família principal (amostra completa, α = 0,05, correção de Holm)")
 st.dataframe(pd.DataFrame([{
-    "QP": qp, "Teste": r["teste"], "Estatística": ui.num(r["estatistica"], 3), "n": r["n"],
+    "QP": qp, "Teste": r["teste"] + (" (item a item, exploratória)" if r.get("exploratoria") else ""),
+    "Estatística": ui.num(r["estatistica"], 3), "n": r["n"],
     "p-valor": ui.p_valor(r["p"]), "p ajustado (Holm)": ui.p_valor(r["p_ajustado"]),
     "Tamanho de efeito": f"{ui.num(r['efeito'], 3)} ({est.magnitude(r['efeito'], r['limiares'])})",
     "Decisão": "Rejeita H0" if r["p_ajustado"] < est.ALFA else "Não rejeita H0",
 } for qp, r in familia.items()]), hide_index=True, width="stretch")
 st.caption(f"Margem de erro das proporções com n = {len(validas)}: ± {ui.num(100 * est.margem_erro(len(validas)), 1)} p.p. "
            "(pior caso, p = 0,5). Efeitos: ε² ≈ 0,01 / 0,06 / 0,14 e r, ρ ≈ 0,1 / 0,3 / 0,5 para pequeno / médio / grande.")
+
+
+def composicao(nome):
+    """Texto sobre como o escore do construto entrou na análise (regra da seção 5)."""
+    d = construtos[nome]
+    if d["item_a_item"]:
+        return (f"α de {nome} = {ui.num(d['alfa'], 3)}, e nenhuma remoção de item chega a 0,70: pela regra da "
+                "seção 5, a QP é analisada item a item, como exploratória (ver Confiabilidade).")
+    if d["removido"]:
+        return (f"α de {nome} com 4 itens = {ui.num(d['alfa'], 3)}; pela regra da seção 5, o escore é calculado sem "
+                f"{d['removido']} (α = {ui.num(d['alfa_final'], 3)}): média de {', '.join(d['itens'])}.")
+    return f"Escore {nome} = média de {', '.join(d['itens'])} (α = {ui.num(d['alfa'], 3)})."
 
 
 def exploratorio(qp, funcao, rotulo_estatistica, rotulo_efeito):
@@ -87,7 +101,7 @@ with abas[1]:
                                                  Q1=lambda s: s.quantile(.25), Q3=lambda s: s.quantile(.75))
     st.dataframe(resumo.round(2), width="stretch")
     st.caption("Áreas com menos de 5 respostas são agrupadas em \"Outras\". H0: a distribuição de UT é igual "
-               "entre as áreas. H1: ao menos uma área difere.")
+               "entre as áreas. H1: ao menos uma área difere. " + composicao("UT"))
     r = familia["QP2"]
     ui.cartao_teste(f"QP2 ({r['teste']})", r, "H de Kruskal-Wallis" if r["teste"] == "Kruskal-Wallis" else "U",
                     "ε²" if r["teste"] == "Kruskal-Wallis" else "r rank-biserial", r["limiares"], r["p_ajustado"])
@@ -134,14 +148,32 @@ with abas[2]:
 
 with abas[3]:
     st.subheader("A maturidade de medição do time está associada ao tempo de experiência do profissional?")
-    figura = px.box(filtradas, x="P2", y="MM", points="all", height=380,
-                    category_orders={"P2": dados.EXPERIENCIA},
-                    labels={"P2": "Tempo de experiência", "MM": "Escore MM (1 a 5)"})
-    figura.update_layout(yaxis_range=[0.8, 5.2], margin={"t": 10})
-    st.plotly_chart(figura, width="stretch")
-    st.caption("H0: não há correlação entre MM e o tempo de experiência (ρ = 0). H1: ρ ≠ 0. A experiência é ordinal "
-               "(1 = menos de 1 ano … 5 = 10 anos ou mais).")
-    r = familia["QP4"]
-    ui.cartao_teste("QP4 (Spearman)", r, "ρ de Spearman", "ρ", r["limiares"], r["p_ajustado"])
-    st.info(f"**Conclusão:** {analises.conclusao('QP4', r, r['p_ajustado'])}")
-    exploratorio("QP4", analises.qp4, "ρ", "ρ")
+    st.caption("H0: não há correlação entre maturidade e tempo de experiência (ρ = 0). H1: ρ ≠ 0. A experiência é "
+               "ordinal (1 = menos de 1 ano … 5 = 10 anos ou mais). " + composicao("MM"))
+    if construtos["MM"]["item_a_item"]:
+        st.warning("**Análise item a item (exploratória).** O construto MM não atingiu a confiabilidade mínima, então "
+                   "não existe um escore único de maturidade. Cada item é correlacionado com a experiência, e os "
+                   "quatro testes entram na correção de Holm da família principal.")
+        itens = (filtradas.melt(id_vars="P2", value_vars=[f"{i}_num" for i in dados.ITENS_MM],
+                                var_name="Item", value_name="Resposta (1–5)")
+                 .assign(Item=lambda t: t["Item"].str.removesuffix("_num")))
+        figura = px.box(itens, x="P2", y="Resposta (1–5)", color="Item", height=420,
+                        category_orders={"P2": dados.EXPERIENCIA},
+                        labels={"P2": "Tempo de experiência"})
+        figura.update_layout(yaxis_range=[0.8, 5.2], margin={"t": 10}, legend={"orientation": "h", "y": -0.25})
+        st.plotly_chart(figura, width="stretch")
+        st.caption("MM4 é reverso e aparece já invertido (6 − resposta): valores altos indicam mais padronização.")
+        for item in dados.ITENS_MM:
+            r = familia[f"QP4 · {item}"]
+            st.markdown(f"**{item}**")
+            ui.cartao_teste(f"QP4 · {item} (Spearman)", r, "ρ de Spearman", "ρ", r["limiares"], r["p_ajustado"])
+    else:
+        figura = px.box(filtradas, x="P2", y="MM", points="all", height=380,
+                        category_orders={"P2": dados.EXPERIENCIA},
+                        labels={"P2": "Tempo de experiência", "MM": "Escore MM (1 a 5)"})
+        figura.update_layout(yaxis_range=[0.8, 5.2], margin={"t": 10})
+        st.plotly_chart(figura, width="stretch")
+        r = familia["QP4"]
+        ui.cartao_teste("QP4 (Spearman)", r, "ρ de Spearman", "ρ", r["limiares"], r["p_ajustado"])
+        st.info(f"**Conclusão:** {analises.conclusao('QP4', r, r['p_ajustado'])}")
+        exploratorio("QP4", analises.qp4, "ρ", "ρ")

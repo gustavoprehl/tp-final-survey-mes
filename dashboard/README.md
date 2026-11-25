@@ -48,3 +48,24 @@ O módulo estatístico é conferido contra valores de referência do pingouin e 
 Com filtro ativo, os testes da família principal continuam calculados na amostra completa; o recálculo no segmento aparece à parte, como exploratório e sem Holm (seção 5).
 
 As páginas leem de `st.session_state` três tabelas: `respostas` (todas, com `motivo_descarte`), `validas` e `filtradas` (válidas com os filtros da barra lateral aplicados).
+
+## Testes
+
+```
+.venv\Scripts\python -m pip install -r dashboard/requirements-dev.txt
+.venv\Scripts\python -m pytest dashboard/tests
+```
+
+## Deploy (Streamlit Community Cloud)
+
+O repositório já está pronto: `dashboard/requirements.txt` fica ao lado do `app.py` (é onde o Cloud procura) e `.streamlit/config.toml` fica na raiz.
+
+1. Acesse https://share.streamlit.io e entre com a conta do GitHub dona do repositório. Autorize o acesso a repositórios privados.
+2. **Create app** → *Deploy a public app from GitHub* (o app herda a privacidade do repositório):
+   - Repository: `gustavoprehl/tp-final-survey-mes`
+   - Branch: `main`
+   - Main file path: `dashboard/app.py`
+3. Em **Advanced settings**, escolha **Python 3.13** e clique em **Deploy**.
+4. Como o repositório é privado, o app também é: em **Settings → Sharing**, adicione os e-mails de quem pode ver (professor e integrantes).
+
+O app lê o CSV de `dados/brutos/` direto do repositório. Para atualizar os dados, faça commit de um novo `respostas_AAAA-MM-DD.csv` (o dashboard usa o de nome mais recente); o Cloud reinstala e recarrega sozinho a cada push na `main`.
