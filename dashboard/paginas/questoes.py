@@ -87,8 +87,45 @@ with abas[0]:
     c1.caption(f"{len(outros)} resposta(s) com métrica em \"Outro\". {conflitos} resposta(s) marcaram "
                "\"Nenhuma\" junto com outras métricas; nesses casos valem as métricas marcadas.")
     a1 = filtradas["A1"].dropna()
-    c2.caption(f"{len(a1)} resposta(s) na pergunta aberta A1 (métricas desejadas). Os códigos entram aqui "
-               "depois da codificação pelos dois codificadores (#25).")
+    c2.caption(f"{len(a1)} resposta(s) na pergunta aberta A1 (métricas desejadas).")
+
+    st.markdown("#### O que os times gostariam de medir e não conseguem (A1)")
+    codificacao = dados.carregar_codificacao()
+    if codificacao is None:
+        st.caption("A codificação da A1 ainda não foi registrada (dados/codificacao_A1.csv).")
+    else:
+        dimensoes = {"metrica": "Métrica desejada", "barreira": "Por que não consegue medir"}
+        provisoria = False
+        colunas = st.columns(2)
+        for coluna, (dimensao, titulo) in zip(colunas, dimensoes.items()):
+            tabela_cod, n_cod, provisorio = analises.frequencia_codigos_a1(codificacao, filtradas, dimensao)
+            provisoria |= provisorio
+            coluna.markdown(f"**{titulo}** (n = {n_cod})")
+            figura = px.bar(tabela_cod.iloc[::-1], x="Respostas", y="Código", orientation="h",
+                            text="Respostas", height=300)
+            figura.update_layout(yaxis_title=None, margin={"t": 10})
+            coluna.plotly_chart(figura, width="stretch")
+        st.caption("Uma resposta pode ter mais de um código, então as barras podem somar mais que n. "
+                   "Livro de códigos em questionario/codificacao.md.")
+        linhas_kappa = []
+        for dimensao, titulo in dimensoes.items():
+            r = analises.concordancia_a1(codificacao, dimensao)
+            if r is not None:
+                linhas_kappa.append({"Dimensão": titulo, "Respostas codificadas": r["n"],
+                                     "Concordância simples": ui.pct(r["concordancia"]),
+                                     "Kappa de Cohen": ui.num(r["kappa"], 2),
+                                     "Interpretação": r["interpretacao"],
+                                     "Aceitável (κ ≥ 0,60)": "Sim" if r["kappa"] >= est.KAPPA_MINIMO else "Não"})
+        if linhas_kappa:
+            st.dataframe(pd.DataFrame(linhas_kappa), hide_index=True, width="stretch")
+            st.caption("Kappa calculado sobre as decisões código a código entre os dois codificadores "
+                       "(Arthur e Gustavo), em todas as respostas da A1, inclusive as descartadas, com a "
+                       "codificação aberta de cada um expressa no livro de códigos unificado. As divergências "
+                       "foram resolvidas por consenso e os gráficos usam os códigos finais. "
+                       "Faixas de Landis e Koch (1977).")
+        if provisoria:
+            st.warning("Codificação em andamento: os códigos acima são os do codificador principal e "
+                       "ainda não passaram pela comparação com o segundo codificador e pelo consenso.")
 
 with abas[1]:
     st.subheader("A utilidade percebida das métricas difere entre áreas de atuação?")

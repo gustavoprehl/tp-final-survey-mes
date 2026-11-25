@@ -14,6 +14,27 @@ RAIZ = Path(__file__).resolve().parent.parent
 PASTA_BRUTOS = RAIZ / "dados" / "brutos"
 PASTA_SINTETICOS = RAIZ / "dados" / "sinteticos"
 ARQUIVO_FORA_POPULACAO = RAIZ / "dados" / "descartes_fora_populacao.csv"
+ARQUIVO_CODIFICACAO = RAIZ / "dados" / "codificacao_A1.csv"
+
+# Livro de códigos unificado da A1 (questionario/codificacao.md): código -> rótulo exibido
+CODIGOS_A1 = {
+    "metrica": {
+        "NEGOCIO": "Resultado de negócio",
+        "ENTREGA": "Prazo e cumprimento das entregas",
+        "OPERACAO": "Funcionamento técnico da entrega",
+        "QUALIDADE": "Qualidade dos dados",
+        "USUARIO": "Uso e satisfação do usuário",
+        "INDIVIDUAL": "Desempenho individual",
+        "GENERICA": "Métrica genérica",
+        "SEM_CONTEUDO": "Sem conteúdo",
+    },
+    "barreira": {
+        "FERRAMENTA": "Falta de ferramenta / limitação técnica",
+        "SISTEMA": "Dado indisponível ou não registrado nos sistemas",
+        "ADESAO": "Processo ou adesão das pessoas",
+        "NAO_INFORMADA": "Motivo não informado",
+    },
+}
 
 TIMESTAMP = "Carimbo de data/hora"
 GRADE_UT = "Sobre a utilidade das métricas no seu trabalho"
@@ -163,6 +184,15 @@ def codificar(df):
     df["UT"] = df[[f"{i}_num" for i in ITENS_UT]].mean(axis=1, skipna=False)
     df["MM"] = df[[f"{i}_num" for i in ITENS_MM]].mean(axis=1, skipna=False)
     return df
+
+
+def carregar_codificacao(caminho=ARQUIVO_CODIFICACAO):
+    """Planilha de codificação da A1, ou None se ainda não existe."""
+    if not Path(caminho).exists():
+        return None
+    cod = pd.read_csv(caminho, dtype=str, keep_default_na=False).replace("", np.nan)
+    cod["timestamp"] = pd.to_datetime(cod["timestamp"], dayfirst=True)
+    return cod
 
 
 def ids_fora_populacao():
