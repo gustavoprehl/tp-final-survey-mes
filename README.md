@@ -14,7 +14,7 @@ Trabalho final da disciplina de Medição e Experimentação de Software (PUC Mi
 - [Enunciado](Enunciado.md)
 - [Plano de ação e divisão de tarefas](docs/PLANO_DE_ACAO.md)
 - [Questionário e matriz de rastreabilidade](questionario/)
-- [Dashboard (Streamlit)](dashboard/)
+- [Dashboard (Streamlit)](dashboard/): **no ar em https://tp-final-survey-mes.streamlit.app/** (privado; acesso por convite)
 - [Registro de desvios do protocolo](docs/DESVIOS.md)
 - [Quadro de tarefas (GitHub Projects)](https://github.com/users/gustavoprehl/projects/7)
 
