@@ -2,6 +2,8 @@
 
 Executar na raiz do repositório:  streamlit run dashboard/app.py
 """
+from pathlib import Path
+
 import streamlit as st
 
 import analises
@@ -11,12 +13,13 @@ st.set_page_config(page_title="Survey: métricas em produtos de dados", page_ico
 
 
 @st.cache_data
-def carregar(caminho, _modificado_em):
+def carregar(caminho, modificado_em, versao_pipeline):
+    # os dois últimos argumentos só renovam o cache quando o CSV ou o pipeline (dados.py) mudam
     return dados.processar(caminho)
 
 
 fonte, sintetico = dados.localizar_fonte()
-respostas = carregar(fonte, fonte.stat().st_mtime)
+respostas = carregar(fonte, fonte.stat().st_mtime, Path(dados.__file__).stat().st_mtime)
 validas = respostas[respostas["motivo_descarte"].isna()]
 # A regra de confiabilidade (seção 5) é decidida na amostra completa e vale para todas as páginas
 construtos = analises.regra_cronbach(validas)
