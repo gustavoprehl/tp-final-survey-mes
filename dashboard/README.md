@@ -38,7 +38,7 @@ O módulo estatístico é conferido contra valores de referência do pingouin e 
 | `estatistica.py` | Margem de erro, Holm, Kruskal-Wallis + ε², Dunn, Mann-Whitney + r rank-biserial, Spearman, alfa de Cronbach (IC de Feldt) |
 | `analises.py` | Aplica os testes às QPs; família principal (QP2, QP3, QP4) com Holm na amostra completa |
 | `componentes.py` | Formatação em português, cartão de resultado de teste (com aviso quando o menor grupo tem n < 5) e bloqueio de filtros com n < 5 |
-| `tests/` | Testes do módulo estatístico (pytest) |
+| `tests/` | Testes do módulo estatístico e do pipeline de limpeza (cada regra de descarte, codificação das escalas, grades iguais) (pytest) |
 | `paginas/perfil.py` | Recebidas, válidas e descartes por motivo; respostas por dia; perfil (P1–P6) |
 | `paginas/likert.py` | Barras divergentes de UT e MM, mediana e IIQ por item |
 | `paginas/questoes.py` | QP1–QP4: visualização, teste, p-valor bruto e ajustado, tamanho de efeito, n e margem de erro |

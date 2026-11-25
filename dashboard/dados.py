@@ -199,9 +199,26 @@ def aplicar_descartes(df, fora_populacao_manual=frozenset()):
     return df
 
 
+GRADES = {"UT": ["UT1", "UT2", "UT3", "ATT", "UT4"], "MM": ITENS_MM}  # linhas na ordem do formulário
+
+
+def marcar_grades_iguais(df):
+    """Sinaliza quem marcou a mesma opção em todas as linhas de uma grade (seção 7).
+
+    É um indício de resposta automática, mas a resposta não é descartada: o
+    descarte por desatenção fica só com a pergunta de atenção (seção 5).
+    Coluna grade_igual: "UT", "MM", "UT e MM" ou vazio.
+    """
+    df = df.copy()
+    iguais = {nome: df[itens].notna().all(axis=1) & (df[itens].nunique(axis=1) == 1)
+              for nome, itens in GRADES.items()}
+    df["grade_igual"] = [" e ".join(n for n in GRADES if iguais[n][i]) or np.nan for i in df.index]
+    return df
+
+
 def processar(caminho):
-    """Carrega, codifica e marca os descartes. Devolve todas as respostas."""
-    return aplicar_descartes(codificar(carregar(caminho)), ids_fora_populacao())
+    """Carrega, codifica, marca os descartes e sinaliza grades iguais. Devolve todas as respostas."""
+    return marcar_grades_iguais(aplicar_descartes(codificar(carregar(caminho)), ids_fora_populacao()))
 
 
 def localizar_fonte():

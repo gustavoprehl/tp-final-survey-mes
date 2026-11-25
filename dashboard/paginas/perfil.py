@@ -25,6 +25,13 @@ with esquerda:
                 .reindex(dados.MOTIVOS, fill_value=0).rename_axis("Motivo").reset_index(name="Respostas"))
     st.dataframe(contagem, hide_index=True, width="stretch")
     st.caption("Cada resposta recebe o motivo da primeira regra que a elimina (seção 5 do protocolo).")
+    iguais = respostas["grade_igual"].notna()
+    iguais_validas = int((iguais & respostas["motivo_descarte"].isna()).sum())
+    st.markdown(f"**Grades com todas as respostas iguais:** {int(iguais.sum())} resposta(s), "
+                f"{iguais_validas} delas entre as válidas.")
+    st.caption("Marcar a mesma opção em todas as linhas de uma grade (UT ou MM) pode indicar resposta "
+               "automática. A resposta é só sinalizada, sem descarte (seção 7). O tempo de preenchimento "
+               "não entra como regra porque o Google Forms registra apenas o horário de envio.")
 with direita:
     st.subheader("Respostas por dia")
     por_dia = (respostas.assign(Situação=respostas["motivo_descarte"].isna().map({True: "Válida", False: "Descartada"}),
