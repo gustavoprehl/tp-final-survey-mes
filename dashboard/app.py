@@ -13,13 +13,19 @@ st.set_page_config(page_title="Survey: métricas em produtos de dados", page_ico
 
 
 @st.cache_data
-def carregar(caminho, modificado_em, versao_pipeline):
-    # os dois últimos argumentos só renovam o cache quando o CSV ou o pipeline (dados.py) mudam
+def carregar(caminho, modificado_em, versao_pipeline, versao_decisoes):
+    # os três últimos argumentos só renovam o cache quando o CSV, o pipeline (dados.py)
+    # ou as decisões da regra 2 (descartes_fora_populacao.csv) mudam
     return dados.processar(caminho)
 
 
+def modificado_em(arquivo):
+    return Path(arquivo).stat().st_mtime if Path(arquivo).exists() else None
+
+
 fonte, sintetico = dados.localizar_fonte()
-respostas = carregar(fonte, fonte.stat().st_mtime, Path(dados.__file__).stat().st_mtime)
+respostas = carregar(fonte, modificado_em(fonte), modificado_em(dados.__file__),
+                     modificado_em(dados.ARQUIVO_FORA_POPULACAO))
 validas = respostas[respostas["motivo_descarte"].isna()]
 # A regra de confiabilidade (seção 5) é decidida na amostra completa e vale para todas as páginas
 construtos = analises.regra_cronbach(validas)

@@ -7,7 +7,7 @@ A codificação segue a seção 5 do protocolo: dois codificadores independentes
 ## Procedimento
 
 1. As respostas foram revisadas antes da codificação. Nenhuma cita nome de pessoa ou empresa, então nada foi substituído por `[removido]` (seção 6).
-2. **Codificação aberta independente.** Arthur e Gustavo codificaram as 17 respostas da A1 (16 válidas e 1 descartada), cada um com o próprio livro de códigos, sem ver a codificação do outro. A de Gustavo está em `dados/codificacao_A1_gustavo_original.csv` e `questionario/livro_codigos_A1_gustavo.md`; a de Arthur, na coluna `*_arthur` de `dados/codificacao_A1.csv`.
+2. **Codificação aberta independente.** Arthur e Gustavo codificaram as 17 respostas da A1 (15 válidas e 2 descartadas), cada um com o próprio livro de códigos, sem ver a codificação do outro. A de Gustavo está em `dados/codificacao_A1_gustavo_original.csv` e `questionario/livro_codigos_A1_gustavo.md`; a de Arthur, na coluna `*_arthur` de `dados/codificacao_A1.csv`.
 3. **Livro unificado.** Os dois livros tinham categorias quase equivalentes. Foram unidos no livro abaixo, que mantém todas as categorias de ambos: as que Gustavo detalhou mais (por exemplo, desempenho, entregabilidade e testes) foram agrupadas, e duas categorias que só ele usou (prazo das entregas e métrica genérica) foram incorporadas.
 4. **Concordância.** A codificação de cada um foi expressa no livro unificado pela tabela de correspondência, sem mudar nenhuma classificação, e o kappa foi calculado a partir daí. Como uma resposta pode ter mais de um código, o kappa usa as decisões código a código (cada código presente ou ausente em cada resposta). A concordância simples é a fração de respostas com exatamente os mesmos códigos.
 5. **Consenso.** As divergências foram decididas em conjunto pelos dois codificadores, e o resultado está nas colunas `metrica_final` e `barreira_final`.
@@ -57,17 +57,17 @@ As duas dimensões passam do mínimo de 0,60 definido na seção 5.
 | 15/11/2026 17:14:50 ("NPS… / aderência ao planejado mensal") | Métrica | USUARIO; NEGOCIO | USUARIO; ENTREGA | `USUARIO; ENTREGA` | "Aderência ao planejado" é cumprimento de plano, e não resultado de negócio |
 | 15/11/2026 21:13:46 ("Métricas de desempenho") | Métrica | OPERACAO | GENERICA | `GENERICA` | A resposta não diz de que é o desempenho |
 
-### Frequência dos códigos finais (16 respostas válidas)
+### Frequência dos códigos finais (15 respostas válidas)
 
 | Métrica desejada | Respostas | | Barreira | Respostas |
 |---|---|---|---|---|
-| Funcionamento técnico da entrega | 3 | | Motivo não informado | 10 |
-| Sem conteúdo | 3 | | Falta de ferramenta / limitação técnica | 3 |
-| Resultado de negócio | 2 | | Dado indisponível ou não registrado | 2 |
-| Prazo e cumprimento das entregas | 2 | | Processo ou adesão das pessoas | 1 |
-| Qualidade dos dados | 2 | | | |
+| Funcionamento técnico da entrega | 3 | | Motivo não informado | 9 |
+| Resultado de negócio | 2 | | Falta de ferramenta / limitação técnica | 3 |
+| Prazo e cumprimento das entregas | 2 | | Dado indisponível ou não registrado | 2 |
+| Qualidade dos dados | 2 | | Processo ou adesão das pessoas | 1 |
 | Uso e satisfação do usuário | 2 | | | |
 | Desempenho individual | 2 | | | |
+| Sem conteúdo | 2 | | | |
 | Métrica genérica | 1 | | | |
 
-Uma resposta tem dois códigos de métrica, então a coluna soma 17.
+Uma resposta tem dois códigos de métrica, então a coluna soma 16. A resposta de 17/11/2026 23:04:39 foi codificada, mas saiu das válidas pela regra 2 (área "Outra" julgada fora da população pelos dois pesquisadores).
