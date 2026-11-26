@@ -34,6 +34,8 @@ O módulo estatístico é conferido contra valores de referência do pingouin e 
 
 | Arquivo | Conteúdo |
 |---|---|
+| `tema.py` | Paleta, template Plotly padrão e CSS dos cartões (KPIs e achados) |
+| `paginas/visao_geral.py` | Página inicial: KPIs, cartões com os achados das QPs e os principais gráficos numa tela |
 | `app.py` | Entrada: fonte de dados, filtros por segmento (barra lateral) e navegação |
 | `dados.py` | Leitura do CSV, códigos da matriz, codificação das escalas, escores UT/MM e descartes |
 | `estatistica.py` | Margem de erro, Holm, Kruskal-Wallis + ε², Dunn, Mann-Whitney + r rank-biserial, Spearman, alfa de Cronbach (IC de Feldt) |

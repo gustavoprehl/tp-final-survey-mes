@@ -8,8 +8,10 @@ import streamlit as st
 
 import analises
 import dados
+import tema
 
 st.set_page_config(page_title="Survey: métricas em produtos de dados", page_icon="📊", layout="wide")
+tema.aplicar()
 
 
 @st.cache_data
@@ -58,7 +60,8 @@ st.session_state["construtos"] = construtos
 st.session_state["filtradas"] = filtradas
 
 pagina = st.navigation([
-    st.Page("paginas/perfil.py", title="Perfil da amostra", icon="👥", default=True),
+    st.Page("paginas/visao_geral.py", title="Visão geral", icon="🏠", default=True),
+    st.Page("paginas/perfil.py", title="Perfil da amostra", icon="👥"),
     st.Page("paginas/likert.py", title="Itens Likert", icon="📶"),
     st.Page("paginas/questoes.py", title="Questões de pesquisa", icon="🔬"),
     st.Page("paginas/confiabilidade.py", title="Confiabilidade", icon="🧮"),
