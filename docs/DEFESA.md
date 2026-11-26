@@ -4,14 +4,14 @@ Dashboard: **https://tp-final-survey-mes.streamlit.app/** (privado: entrar com a
 
 ## Resultados em uma frase cada
 
-| | Resultado (n = 27 válidas, margem ± 18,9 p.p.) |
+| | Resultado (n = 26 válidas, margem ± 19,2 p.p.) |
 |---|---|
-| Amostra | 30 respostas brutas, 27 válidas: 2 falharam na pergunta de atenção, 1 estava fora da população. Abaixo do mínimo de 50 (desvio declarado) |
-| QP1 | Qualidade dos dados e tempo de entrega são as mais citadas (63,0% cada), mas **empatam** com outras 4 métricas dentro da margem de erro. Atualização no prazo é a menos citada (25,9%) |
-| QP2 | Sem evidência de diferença de utilidade percebida entre as áreas (Kruskal-Wallis, p ajustado = 1,0, ε² = 0,05, pequeno). UT calculado sem UT4 |
-| QP3 | Sem evidência de menos retrabalho em quem mede a qualidade (Mann-Whitney unilateral, p ajustado = 1,0). O efeito observado foi até no sentido oposto (r = +0,23), e o grupo "não mede" tem só 2 pessoas |
-| QP4 | MM não foi confiável (α = 0,42): análise item a item. Nenhum item se associa à experiência (\|ρ\| ≤ 0,19, p ajustado = 1,0) |
-| Confiabilidade | UT: α = 0,44 → 0,72 sem o reverso UT4. MM: α = 0,42, nenhuma remoção chega a 0,70 |
+| Amostra | 30 respostas brutas, 26 válidas: 2 falharam na pergunta de atenção e 2 estavam fora da população (1 não trabalha com dados e 1 área "Outra" julgada fora pelos dois pesquisadores). Abaixo do mínimo de 50 (desvio declarado) |
+| QP1 | Qualidade dos dados é a mais citada (65,4%), mas **empata** com outras 4 métricas dentro da margem de erro: tempo de entrega (61,5%), impacto no negócio (53,8%), uso (50,0%) e satisfação (50,0%). Atualização no prazo é a menos citada (26,9%) |
+| QP2 | Sem evidência de diferença de utilidade percebida entre as áreas (Kruskal-Wallis, p ajustado = 1,0, ε² = 0,04, pequeno). UT calculado sem UT4 |
+| QP3 | Sem evidência de menos retrabalho em quem mede a qualidade (Mann-Whitney unilateral, p ajustado = 1,0). O efeito observado foi até no sentido oposto (r = +0,29), e o grupo "não mede" tem só 2 pessoas |
+| QP4 | MM não foi confiável (α = 0,43): análise item a item. Nenhum item se associa à experiência (\|ρ\| ≤ 0,17, p ajustado = 1,0) |
+| Confiabilidade | UT: α = 0,45 → 0,72 sem o reverso UT4. MM: α = 0,43, nenhuma remoção chega a 0,70 |
 
 ## Demo de 10 minutos
 
